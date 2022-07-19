@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Button, Icon, Label } from 'semantic-ui-react';
 import { gql, useMutation } from '@apollo/client'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import {AuthContext} from '../context/auth';
+import { AuthContext } from '../context/auth';
+import MyPopup from "../utils/MyPopup";
 
-function LikeButton({ post: { id, likes, likeCount }}) {
+function LikeButton({ post: { id, likes, likeCount } }) {
     const [liked, setLiked] = useState(false);
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         if (user && likes.find(like => like.username === user.username)) {
@@ -37,13 +38,15 @@ function LikeButton({ post: { id, likes, likeCount }}) {
     )
 
     return (
-        <Button as='div' labelPosition='right' onClick={likePost}>
-            {likeButton}
+        <MyPopup content="Like Post">
+            <Button as='div' labelPosition='right' onClick={likePost}>
+                {likeButton}
 
-            <Label as='a' basic color='teal' pointing='left'>
-                {likeCount}
-            </Label>
-        </Button>
+                <Label as='a' basic color='teal' pointing='left'>
+                    {likeCount}
+                </Label>
+            </Button>
+        </MyPopup>
     )
 }
 
