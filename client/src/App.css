@@ -1,0 +1,9 @@
+.grid-column {
+  margin-bottom: 2rem !important;
+}
+
+.home-page-title{
+  display: block !important;
+  margin-top: 1rem;
+  text-align: center;
+}
