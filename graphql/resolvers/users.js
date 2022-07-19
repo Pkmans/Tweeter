@@ -29,10 +29,10 @@ module.exports = {
                 throw new UserInputError("User not found", {errors});
             }
 
-            const match = bcrypt.compare(password, user.password);
+            const match = await bcrypt.compare(password, user.password);
             if (!match) {
-                errors.general = "Incorrect credentials"
-                throw new UserInputError("Incorrect credentials", {errors});
+                errors.general = "Incorrect password"
+                throw new UserInputError("Incorrect password", {errors});
             }
 
             const token = generateToken(user);

@@ -4,6 +4,14 @@
 
 .home-page-title{
   display: block !important;
-  margin-top: 1rem;
   text-align: center;
+}
+
+.form-container {
+  margin: auto;
+  width: 40rem;
+}
+
+.menu-bar-container {
+  margin-bottom: 1.5rem;
 }

@@ -25,7 +25,7 @@ module.exports.validateRegisterInput = (
     if (password === '') {
         errors.password = 'Password must not be empty';
     } else if (password !== confirmPassword) {
-        errors.password = 'Passwords must match';
+        errors.confirmPassword = 'Passwords must match';
     }
 
     // return errors and valid boolean
