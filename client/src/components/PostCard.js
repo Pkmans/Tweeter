@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 import LikeButton from './LikeButton';
+import DeleteButton from './DeleteButton';
 
 function PostCard({ post: { id, username, createdAt, body, likes, likeCount, comments, commentCount } }) {
 
@@ -26,7 +27,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
             </Card.Content>
             <Card.Content extra>
                 {/* Like Button */}
-                <LikeButton user={user} post={{id, likes, likeCount}}/>
+                <LikeButton post={{id, likes, likeCount}}/>
 
                 {/* Comment Button */}
                 <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
@@ -40,9 +41,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
 
                 {/* Delete Button */}
                 {user && user.username === username && (
-                    <Button negative floated='right'>
-                        <Icon name='trash' style={{ margin: 0 }} />
-                    </Button>
+                    <DeleteButton postId={id}/>
                 )}
 
             </Card.Content>

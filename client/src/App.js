@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MenuBar from './components/MenuBar';
+import SinglePost from './pages/SinglePost';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route exact path="/register" element={<AuthRoute />}>
               <Route exact path="/register" element={<Register />} />
             </Route>
+            <Route exact path="/posts/:postId" element={<SinglePost/>}/>
           </Routes>
         </Container>
       </Router>

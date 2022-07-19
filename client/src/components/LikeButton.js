@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Button, Icon, Label } from 'semantic-ui-react';
 import { gql, useMutation } from '@apollo/client'
 import {Link} from 'react-router-dom';
 
-function LikeButton({ user, post: { id, likes, likeCount } }) {
+import {AuthContext} from '../context/auth';
+
+function LikeButton({ post: { id, likes, likeCount }}) {
     const [liked, setLiked] = useState(false);
+
+    const {user} = useContext(AuthContext);
 
     useEffect(() => {
         if (user && likes.find(like => like.username === user.username)) {
