@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, Icon, Label, Image } from 'semantic-ui-react'
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-function PostCard({ post: { id, username, createdAt, body, likes, likeCount, comments, commentCount } }) {
-    function likePost() {
-        console.log("post liked");
-    }
+import { AuthContext } from '../context/auth';
+import LikeButton from './LikeButton';
 
-    function commentPost() {
-        console.log("comment liked");
-    }
+function PostCard({ post: { id, username, createdAt, body, likes, likeCount, comments, commentCount } }) {
+
+    const { user } = useContext(AuthContext);
 
     return (
         <Card fluid>
@@ -27,15 +25,11 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button as='div' labelPosition='right' onClick={likePost}>
-                    <Button basic color='teal'>
-                        <Icon name='heart' />
-                    </Button>
-                    <Label as='a' basic color='teal' pointing='left'>
-                        {likeCount}
-                    </Label>
-                </Button>
-                <Button as='div' labelPosition='right' onClick={commentPost}>
+                {/* Like Button */}
+                <LikeButton user={user} post={{id, likes, likeCount}}/>
+
+                {/* Comment Button */}
+                <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
                     <Button basic color='blue'>
                         <Icon name='comments' />
                     </Button>
@@ -43,6 +37,14 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                         {commentCount}
                     </Label>
                 </Button>
+
+                {/* Delete Button */}
+                {user && user.username === username && (
+                    <Button negative floated='right'>
+                        <Icon name='trash' style={{ margin: 0 }} />
+                    </Button>
+                )}
+
             </Card.Content>
         </Card>
     )
