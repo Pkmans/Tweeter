@@ -7,7 +7,6 @@ import moment from "moment";
 import LikeButton from "../components/LikeButton";
 import DeleteButton from "../components/DeleteButton";
 import { AuthContext } from '../context/auth';
-// import useForm from "../utils/hooks";
 
 function SinglePost() {
     const { postId } = useParams();
@@ -37,17 +36,16 @@ function SinglePost() {
 
         postMarkup = (
             <Grid>
-                <Grid.Column width={4}>
+                <Grid.Column width={3}>
                     <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                 </Grid.Column>
-                <Grid.Column width={12}>
-                    <Card fluid>
+                <Grid.Column width={13}>
+                    <Card fluid className="card">
                         <Card.Content>
                             <Card.Header>{username}</Card.Header>
                             <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
                             <Card.Description>{body}</Card.Description>
                         </Card.Content>
-                        <hr />
                         <Card.Content>
                             <LikeButton post={{ id, likes, likeCount }} />
 
@@ -68,7 +66,7 @@ function SinglePost() {
                     {user && (
                         <Card fluid>
                             <Card.Content>
-                                <p>Post a comment</p>
+                                <h4>Post a comment</h4>
                                 <Form>
                                     <div className='ui input fluid'>
                                         <input

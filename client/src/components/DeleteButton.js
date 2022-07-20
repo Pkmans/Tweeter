@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Icon, Confirm } from 'semantic-ui-react';
 import { gql, useMutation } from '@apollo/client'
 
 import { FETCH_POSTS_QUERY } from "../utils/graphql";
+import { ThemeContext } from "../App";
 import MyPopup from "../utils/MyPopup";
 
 function DeleteButton({ postId, callback, commentId }) {
     const [confirmOpen, setConfirmOpen] = useState(false);
+    const {theme} = useContext(ThemeContext);
 
     const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
 
@@ -31,7 +33,7 @@ function DeleteButton({ postId, callback, commentId }) {
     return (
         <>
             <MyPopup content='Delete Post'>
-                <Button negative floated='right' onClick={() => setConfirmOpen(true)}>
+                <Button basic={theme === 'dark'} color='red' floated='right' onClick={() => setConfirmOpen(true)}>
                     <Icon name='trash' style={{ margin: 0 }} />
                 </Button>
             </MyPopup>
