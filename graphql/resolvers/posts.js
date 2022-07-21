@@ -48,31 +48,41 @@ module.exports = {
             return post;
         },
 
-        async deletePost(_, { postId }, context) {
-            const {username} = checkAuth(context);
+        async editPost(_, { postId, newBody }, context) {
+            const { username } = checkAuth(context);
+
+            if (newBody.trim() === '') {
+                throw new Error('Post body must not be empty');
+            }
 
             try {
-                const post = await Post.findById(postId);
-                    if (username === post.username) {
-                        await post.remove();
-                        return 'Post deleted successfully';
-                    } else {
-                        throw new AuthenticationError("Action not allowed");
-                    }
+                await Post.updateOne({_id: postId, username}, {body: newBody});
+                return Post.findById(postId);
             } catch (err) {
-                throw new Error(err); 
+                throw new Error(err);
+            }
+             
+        },
+
+        async deletePost(_, { postId }, context) {
+            const { username } = checkAuth(context);
+
+            try {
+                await Post.deleteOne({_id: postId, username});
+                return 'Post deleted successfully'    
+            } catch (err) {
+                throw new Error(err);
             }
         },
 
-        async likePost(_, {postId}, context) {
-            const {username} = checkAuth(context);
+        async likePost(_, { postId }, context) {
+            const { username } = checkAuth(context);
 
             const post = await Post.findById(postId);
 
             if (post) {
                 if (post.likes.find(likes => likes.username === username)) {
                     // Post already liked, unlike it
-                    console.log("post already liked");
                     post.likes = post.likes.filter(likes => likes.username !== username);
                 } else {
                     // Post not liked, like it

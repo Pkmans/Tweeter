@@ -28,6 +28,12 @@
   margin-bottom: 1rem;
 }
 
+/* Semantic UI Icons */
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown) {
+  margin: 0;
+}
+
+
 /* ---------- Light mode & Dark mode styling ---------- */
 
 /* --- Light --- */
@@ -75,8 +81,13 @@
   box-shadow: 0 1px 3px 0 #242526, 0 0 0 1px #242526;
 }
 
-#dark h1, #dark .header, #dark .meta, #dark .description {
+#dark h1, #dark .header, #dark .description {
   color: rgb(223, 223, 223);
+}
+
+#dark .meta {
+  color: rgb(121, 121, 121);
+
 }
 
 #dark .ui.card>.extra, .ui.cards>.card>.extra {

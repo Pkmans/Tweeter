@@ -16,12 +16,14 @@ function Home() {
             <Grid.Row className="home-page-title">
                 <h1>Recent Posts</h1>
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row className="home-page-post-form">
                 {user && (
                     <Grid.Column>
                         <PostForm />
                     </Grid.Column>
                 )}
+            </Grid.Row>
+            <Grid.Row>
 
                 {loading ? (
                     <p>Loading Posts...</p>
