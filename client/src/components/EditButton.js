@@ -1,23 +1,26 @@
 import React, { useState } from "react";
-import { Modal, Form, Header, Button, Icon } from "semantic-ui-react";
+import { Modal, Form, Button, Icon } from "semantic-ui-react";
 import { gql, useMutation } from '@apollo/client';
 
 import useForm from "../utils/hooks";
 
-function EditButton({ post: { id, body } }) {     
+function EditButton({ postId, body, profileId, section, className}) {
     const [open, setOpen] = useState(false);
-
-    const { onChange, onSubmit, values } = useForm(editPostCallback, {
-        body: body
+    const { onChange, onSubmit, values } = useForm(editCallback, {
+        body
     })
 
-    const [editPost] = useMutation(EDIT_POST_MUTATION, {
-        variables: { postId: id, newBody: values.body }
+    const mutation = profileId ? EDIT_PROFILE_MUTATION : EDIT_POST_MUTATION;
+
+    const [editPostorProfile] = useMutation(mutation, {
+        update() {
+            setOpen(false);
+        },
+        variables: { postId, profileId, body: values.body, section }
     })
 
-    function editPostCallback() {
-        editPost();
-        setOpen(false);
+    function editCallback() {
+        editPostorProfile();
     }
 
     return (
@@ -28,7 +31,7 @@ function EditButton({ post: { id, body } }) {
             onOpen={() => setOpen(true)}
             open={open}
             trigger={
-                <Button size='tiny' color='instagram'>
+                <Button className={className} size='tiny' color='instagram'>
                     <Icon name='pencil' />
                 </Button>
             }
@@ -52,10 +55,24 @@ function EditButton({ post: { id, body } }) {
 }
 
 const EDIT_POST_MUTATION = gql`
-    mutation editPost($postId: ID!, $newBody: String!) {
-        editPost(postId: $postId, newBody: $newBody) {
+    mutation editPost($postId: ID!, $body: String!) {
+        editPost(postId: $postId, body: $body) {
             id
             body
+        }
+    }
+`
+const EDIT_PROFILE_MUTATION = gql`
+    mutation editProfile($profileId: ID!, $section: String!, $body: String!) {
+        editProfile(profileId: $profileId, section: $section, body: $body) {
+            id
+            username
+            email
+            phone
+            school
+            location
+            bio
+            birthDate
         }
     }
 `

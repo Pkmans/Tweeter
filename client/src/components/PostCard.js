@@ -45,7 +45,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
 
                 {/* Edit Button */}
                 {user && user.username === username && (
-                    <EditButton post={{id, body}}/>
+                    <EditButton postId={id} body={body}/>
                 )}
 
 

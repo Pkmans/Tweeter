@@ -33,6 +33,11 @@
   margin: 0;
 }
 
+/* Profile Page */
+.profile-edit-button {
+  float: right;
+}
+
 
 /* ---------- Light mode & Dark mode styling ---------- */
 

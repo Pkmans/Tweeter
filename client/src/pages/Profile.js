@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Button, Card, Icon, Label, Grid, Image, Form } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
+import EditButton from "../components/EditButton";
 
 function Profile() {
     const { profileId } = useParams();
@@ -30,7 +31,8 @@ function Profile() {
                 <Grid.Column width={13}>
                     <Card fluid className="card">
                         <Card.Content>
-                            <Card.Header>{username}</Card.Header>
+                            <Card.Header>{username}
+                            </Card.Header>
                             <Card.Meta></Card.Meta>
                             <Card.Description>Phone: {phone}</Card.Description>
                             <Card.Description>Email: {email}</Card.Description>
@@ -40,21 +42,30 @@ function Profile() {
 
                     <Card fluid className="card">
                         <Card.Content>
-                            <Card.Header>About Me</Card.Header>
+                            <Card.Header>
+                                About Me
+                                <EditButton className='profile-edit-button' profileId={id} section='bio' body={bio} />
+                            </Card.Header>
                             <Card.Description>{bio}</Card.Description>
                         </Card.Content>
                     </Card>
 
                     <Card fluid className="card">
                         <Card.Content>
-                            <Card.Header>Education</Card.Header>
+                            <Card.Header>
+                                Education
+                                <EditButton className='profile-edit-button' profileId={id} section='school' body={school} />
+                            </Card.Header>
                             <Card.Description>{school}</Card.Description>
                         </Card.Content>
                     </Card>
 
                     <Card fluid className="card">
                         <Card.Content>
-                            <Card.Header>Where I live</Card.Header>
+                            <Card.Header>
+                                Where I live
+                                <EditButton className='profile-edit-button' profileId={id} section='location' body={location} />
+                            </Card.Header>
                             <Card.Description>{location}</Card.Description>
                         </Card.Content>
                     </Card>

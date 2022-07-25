@@ -48,15 +48,15 @@ module.exports = {
             return post;
         },
 
-        async editPost(_, { postId, newBody }, context) {
+        async editPost(_, { postId, body }, context) {
             const { username } = checkAuth(context);
 
-            if (newBody.trim() === '') {
+            if (body.trim() === '') {
                 throw new Error('Post body must not be empty');
             }
 
             try {
-                await Post.updateOne({_id: postId, username}, {body: newBody});
+                await Post.updateOne({_id: postId, username}, {body});
                 return Post.findById(postId);
             } catch (err) {
                 throw new Error(err);
