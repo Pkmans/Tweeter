@@ -18,6 +18,8 @@ function Register() {
         confirmPassword: ''
     });
 
+    // Mutation
+
     const [addUser, { loading }] = useMutation(REGISTER_USER, {
         update(_, result) {
             context.login(result.data.register);
@@ -28,6 +30,8 @@ function Register() {
         },
         variables: values
     })
+
+    // Callback Function
 
     function registerUser() {
         addUser();

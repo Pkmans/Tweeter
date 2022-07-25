@@ -14,12 +14,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MenuBar from './components/MenuBar';
 import SinglePost from './pages/SinglePost';
+import Profile from './pages/Profile';
 
 export const ThemeContext = createContext(null);
 
 function App() {
 
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
 
   function toggleTheme() {
     setTheme(prevValue => prevValue === 'light' ? 'dark' : 'light');
@@ -41,6 +42,7 @@ function App() {
                   <Route exact path="/register" element={<Register />} />
                 </Route>
                 <Route exact path="/posts/:postId" element={<SinglePost />} />
+                <Route exact path="/profiles/:profileId" element={<Profile />} />
               </Routes>
               <Switch onChange={toggleTheme} checked={theme === 'dark' ? true : false}
                 uncheckedIcon={false} checkedIcon={false}

@@ -11,6 +11,16 @@ module.exports = gql`
         likeCount: Int!
         commentCount: Int!
     }
+    type Profile {
+        id: ID!
+        username: String!
+        email: String!
+        phone: String!
+        school: String!
+        location: String!
+        bio: String!
+        birthDate: String!
+    }
     type Like {
         id: ID!
         username: String!
@@ -38,6 +48,7 @@ module.exports = gql`
     type Query {
         getPosts: [Post]
         getPost(postId: ID!): Post
+        getProfile(profileId: ID!): Profile!
     }
     type Mutation {
         login(username: String!, password: String!): User!
@@ -48,5 +59,6 @@ module.exports = gql`
         likePost(postId: ID!): Post!
         createComment(postId: ID!, body: String!): Post!
         deleteComment(postId: ID!, commentId: ID!): Post!
+        createProfile(username: String!, email: String!): Profile!
     }
 `;

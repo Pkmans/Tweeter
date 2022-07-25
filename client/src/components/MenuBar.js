@@ -3,32 +3,45 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from "../context/auth";
+import jwtDecode from 'jwt-decode';
+
 
 function MenuBar() {
-    const context = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
     const pathname = window.location.pathname;
     const path = pathname === '/' ? 'home' : pathname.substring(1);
-
     const [activeItem, setActiveItem] = useState(path);
 
     function handleItemClick(e, { name }) {
         setActiveItem(name)
     };
 
+
+    const token = localStorage.getItem('jwtToken');
+    let decodedToken = null;
+    if (token) {
+        decodedToken = jwtDecode(token);
+    }
+
     return (
         <div className="menu-bar-container">
-            {context.user ? (
+            {user && token ? (
                 <Menu pointing secondary size='massive' color='teal'>
                     <Menu.Item
-                        name={context.user.username}
+                        name={user.username}
                         active
                         as={Link}
                         to='/'
                     />
                     <Menu.Menu position='right'>
                         <Menu.Item
+                            name='profile'
+                            as={Link}
+                            to={`/profiles/${decodedToken.profile}`} /* TODO */
+                        />
+                        <Menu.Item
                             name='logout'
-                            onClick={context.logout}
+                            onClick={logout}
                         />
                     </Menu.Menu>
 
