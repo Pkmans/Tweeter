@@ -4,23 +4,23 @@ import { gql, useMutation } from '@apollo/client';
 
 import useForm from "../utils/hooks";
 
-function EditButton({ postId, body, profileId, section, className}) {
+function EditButtonMultiple({ postId, body, profileId, className}) {
     const [open, setOpen] = useState(false);
     const { onChange, onSubmit, values } = useForm(editCallback, {
-        body
+        phone: body.phone,
+        email: body.email,
+        birthDate: body.birthDate
     })
 
-    const mutation = profileId ? EDIT_PROFILE_MUTATION : EDIT_POST_MUTATION;
-
-    const [editPostorProfile] = useMutation(mutation, {
+    const [editProfile] = useMutation(EDIT_MULTIPLE_PROFILE_MUTATION, {
         update() {
             setOpen(false);
         },
-        variables: { postId, profileId, body: values.body, section }
+        variables: { postId, profileId, phone: values.phone, email: values.email, birthDate: values.birthDate }
     })
 
     function editCallback() {
-        editPostorProfile();
+        editProfile();
     }
 
     return (
@@ -40,7 +40,9 @@ function EditButton({ postId, body, profileId, section, className}) {
             <Modal.Content>
                 <Form>
                     <Form.Field>
-                        <Form.Input label='Post message' type='text' name='body' onChange={onChange} value={values.body} />
+                        <Form.Input label='Phone' type='text' name='phone' onChange={onChange} value={values.phone} />
+                        <Form.Input label='Email' type='text' name='email' onChange={onChange} value={values.email} />
+                        <Form.Input label='Date of Birth' type='text' name='birthDate' onChange={onChange} value={values.birthDate} />
                     </Form.Field>
                 </Form>
             </Modal.Content>
@@ -54,17 +56,9 @@ function EditButton({ postId, body, profileId, section, className}) {
     );
 }
 
-const EDIT_POST_MUTATION = gql`
-    mutation editPost($postId: ID!, $body: String!) {
-        editPost(postId: $postId, body: $body) {
-            id
-            body
-        }
-    }
-`
-const EDIT_PROFILE_MUTATION = gql`
-    mutation editProfile($profileId: ID!, $section: String!, $body: String!) {
-        editProfile(profileId: $profileId, section: $section, body: $body) {
+const EDIT_MULTIPLE_PROFILE_MUTATION = gql`
+    mutation editMultipleProfile($profileId: ID!, $phone: String!, $email: String!, $birthDate: String!) {
+        editMultipleProfile(profileId: $profileId, phone: $phone, email: $email, birthDate: $birthDate) {
             id
             username
             email
@@ -78,4 +72,4 @@ const EDIT_PROFILE_MUTATION = gql`
     }
 `
 
-export default EditButton
+export default EditButtonMultiple

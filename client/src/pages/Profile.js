@@ -5,6 +5,7 @@ import { Button, Card, Icon, Label, Grid, Image, Form } from 'semantic-ui-react'
 
 import { AuthContext } from '../context/auth';
 import EditButton from "../components/EditButton";
+import EditButtonMultiple from "../components/EditButtonMultiple";
 
 function Profile() {
     const { profileId } = useParams();
@@ -21,17 +22,28 @@ function Profile() {
     if (!getProfile) {
         profileMarkup = <p>Loading profile...</p>
     } else {
-        const { id, username, email, bio, phone, school, location, birthDate } = getProfile;
+        const { id, username, email, bio, phone, school, location, birthDate, relationship } = getProfile;
+
+        console.log(relationship);
 
         profileMarkup = (
             <Grid>
+                {/* Profile Picture */}
                 <Grid.Column width={3}>
                     <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                 </Grid.Column>
+
+                {/* Profile Descriptions */}
                 <Grid.Column width={13}>
                     <Card fluid className="card">
                         <Card.Content>
-                            <Card.Header>{username}
+                            <Card.Header>
+                                {username}
+                                <EditButtonMultiple
+                                    body={{ phone, email, birthDate }}
+                                    profileId={id}
+                                    className='profile-edit-button'
+                                />
                             </Card.Header>
                             <Card.Meta></Card.Meta>
                             <Card.Description>Phone: {phone}</Card.Description>
@@ -50,25 +62,48 @@ function Profile() {
                         </Card.Content>
                     </Card>
 
-                    <Card fluid className="card">
-                        <Card.Content>
-                            <Card.Header>
-                                Education
-                                <EditButton className='profile-edit-button' profileId={id} section='school' body={school} />
-                            </Card.Header>
-                            <Card.Description>{school}</Card.Description>
-                        </Card.Content>
-                    </Card>
+                    {/* 1 Row 2 column Split */}
+                    <Grid>
+                        <Grid.Row columns={3}>
+                            <Grid.Column>
+                                <Card fluid className="card">
+                                    <Card.Content>
+                                        <Card.Header>
+                                            Education
+                                            <EditButton className='profile-edit-button' profileId={id} section='school' body={school} />
+                                        </Card.Header>
+                                        <Card.Description>{school}</Card.Description>
+                                    </Card.Content>
+                                </Card>
+                            </Grid.Column>
 
-                    <Card fluid className="card">
-                        <Card.Content>
-                            <Card.Header>
-                                Where I live
-                                <EditButton className='profile-edit-button' profileId={id} section='location' body={location} />
-                            </Card.Header>
-                            <Card.Description>{location}</Card.Description>
-                        </Card.Content>
-                    </Card>
+                            <Grid.Column>
+                                <Card fluid className="card">
+                                    <Card.Content>
+                                        <Card.Header>
+                                            Where I live
+                                            <EditButton className='profile-edit-button' profileId={id} section='location' body={location} />
+                                        </Card.Header>
+                                        <Card.Description>{location}</Card.Description>
+                                    </Card.Content>
+                                </Card>
+                            </Grid.Column>
+
+                            <Grid.Column>
+                                <Card fluid className="card">
+                                    <Card.Content>
+                                        <Card.Header>
+                                            Relationship Status
+                                            <EditButton className='profile-edit-button' profileId={id} section='relationship' body={relationship} />
+                                        </Card.Header>
+                                        <Card.Description>{relationship}</Card.Description>
+                                    </Card.Content>
+                                </Card>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                    {/* 1 Row 2 column Split */}
+
                 </Grid.Column>
             </Grid>
         )
@@ -88,6 +123,7 @@ const FETCH_PROFILE_QUERY = gql`
             school
             location
             birthDate
+            relationship
         }
     }
 `

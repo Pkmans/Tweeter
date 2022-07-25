@@ -8,7 +8,8 @@ const profileSchema = new mongoose.Schema({
     school: String,
     location: String,
     createdAt: String,
-    birthDate: String
+    birthDate: String,
+    relationship: String
 })
 
 module.exports = mongoose.model('Profile', profileSchema);

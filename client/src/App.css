@@ -35,7 +35,8 @@
 
 /* Profile Page */
 .profile-edit-button {
-  float: right;
+  position: absolute;
+  right: 1rem;
 }
 
 

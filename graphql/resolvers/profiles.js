@@ -28,6 +28,17 @@ module.exports = {
             } catch (err) {
                 throw new Error(err);
             }
+        },
+
+        async editMultipleProfile(_, {profileId, phone, email, birthDate}, context) {
+            const { username } = checkAuth(context);
+
+            try {
+                await Profile.updateOne({_id: profileId, username}, {phone, email, birthDate});
+                return Profile.findById(profileId);
+            } catch (err) {
+                throw new Error(err);
+            }
         }
     }
 }

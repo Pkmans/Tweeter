@@ -20,6 +20,7 @@ module.exports = gql`
         location: String!
         bio: String!
         birthDate: String!
+        relationship: String!
     }
     type Like {
         id: ID!
@@ -61,5 +62,6 @@ module.exports = gql`
         deleteComment(postId: ID!, commentId: ID!): Post!
         createProfile(username: String!, email: String!): Profile!
         editProfile(profileId: ID!, section: String!, body: String!): Profile!
+        editMultipleProfile(profileId: ID!, phone: String!, email: String!, birthDate: String!): Profile!
     }
 `;

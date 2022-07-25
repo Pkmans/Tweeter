@@ -74,7 +74,8 @@ module.exports = {
                 school: '',
                 location: '',
                 bio: '',
-                birthDate: ''
+                birthDate: '',
+                relationship: ''
             })
 
             const profile = await newProfile.save();
