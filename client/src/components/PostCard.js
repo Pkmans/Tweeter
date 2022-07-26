@@ -57,7 +57,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                         <Button size='tiny' basic color='blue'>
                             <Icon name='comments' />
                         </Button>
-                        <Label as='a' basic color='blue' pointing='left'>
+                        <Label basic color='blue' pointing='left'>
                             {commentCount}
                         </Label>
                     </Button>

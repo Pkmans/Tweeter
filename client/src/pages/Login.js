@@ -19,7 +19,6 @@ function Login() {
 
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         update(_, result) {
-            console.log(result.data.login);
             context.login(result.data.login);
             navigate('/');
         },

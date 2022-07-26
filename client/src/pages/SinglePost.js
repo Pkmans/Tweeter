@@ -91,12 +91,12 @@ function SinglePost() {
                         </Card>
                     )}
 
-                    {comments.map((comment, i) => {
+                    {comments.map((comment) => {
                         return (
-                            <Card fluid>
+                            <Card fluid key={comment.id}>
                                 <Card.Content>
                                     {user && user.username === comment.username && (
-                                        <DeleteButton key={i} postId={id} commentId={comment.id} />
+                                        <DeleteButton postId={id} commentId={comment.id} />
                                     )}
                                     <Card.Header>{comment.username}</Card.Header>
                                     <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>

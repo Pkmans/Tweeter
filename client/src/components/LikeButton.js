@@ -32,7 +32,7 @@ function LikeButton({ post: { id, likes, likeCount } }) {
             </Button >
         )
     ) : (
-        <Button basic color='teal' as={Link} to='/login'>
+        <Button size='tiny' basic color='teal' as={Link} to='/login'>
             <Icon name='heart' />
         </Button>
     )
@@ -42,7 +42,7 @@ function LikeButton({ post: { id, likes, likeCount } }) {
             <Button as='div' labelPosition='right' onClick={likePost}>
                 {likeButton}
                 
-                <Label as='a' basic color='teal' pointing='left'>
+                <Label basic color='teal' pointing='left'>
                     {likeCount}
                 </Label>
             </Button>
