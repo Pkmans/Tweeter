@@ -11,6 +11,8 @@ function Home() {
     const { user } = useContext(AuthContext);
     const { loading, data } = useQuery(FETCH_POSTS_QUERY);
 
+    // console.log('home data is ', data);
+
     return (
         <Grid columns={3} >
             <Grid.Row className="home-page-title">

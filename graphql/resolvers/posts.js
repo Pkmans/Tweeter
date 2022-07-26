@@ -1,5 +1,6 @@
 const { AuthenticationError, UserInputError } = require('apollo-server');
 const Post = require('../../models/Post');
+const User = require('../../models/User');
 const checkAuth = require('../../utils/check-auth');
 
 
@@ -25,12 +26,27 @@ module.exports = {
             } catch (err) {
                 throw new Error(err);
             }
-        }
+        },
+
+        // async getPostUser(_, {postId}) {
+        //     try {
+        //         const post = await Post.findOne({ _id: postId });
+        //         if (post) {
+        //             console.log(post.user);
+        //             return 'nice';
+        //             // return post.user;
+        //         } else {
+        //             throw new Error ("Post not found");
+        //         }
+        //     } catch (err) {
+        //         throw new Error(err);
+        //     }
+        // }
     },
 
     Mutation: {
         async createPost(_, { body }, context) {
-            const user = checkAuth(context);
+            const {id, username} = checkAuth(context);
 
             if (body.trim() === '') {
                 throw new Error('Post body must not be empty');
@@ -38,10 +54,15 @@ module.exports = {
 
             const newPost = new Post({
                 body,
-                user: user.id,
-                username: user.username,
+                username,
+                user: id,
                 createdAt: new Date().toISOString()
             });
+
+            // Link createdPost to the User
+            const foundUser = await User.findById(id);
+            foundUser.posts.push(newPost);
+            await foundUser.save();
 
             const post = await newPost.save();
 

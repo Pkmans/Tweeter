@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Card, Icon, Label, Image } from 'semantic-ui-react'
+import { gql, useQuery } from '@apollo/client';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
@@ -10,8 +11,20 @@ import EditButton from './EditButton';
 import MyPopup from '../utils/MyPopup';
 
 function PostCard({ post: { id, username, createdAt, body, likes, likeCount, comments, commentCount } }) {
-
     const { user } = useContext(AuthContext);
+
+    const { loading, data } = useQuery(FETCH_USER_PROFILE, {
+        update() {
+            console.log("User profile has successfully been fetched");
+        },
+        variables: { username }
+    })
+
+    // if(data) {
+    //     console.log("data is: ", data.getUserProfile);
+    // } else {
+    //     console.log('no data');
+    // }
 
     return (
         <Card fluid className='postcard'>
@@ -21,11 +34,18 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                     size='mini'
                     src='https://react.semantic-ui.com/images/avatar/large/molly.png'
                 />
-                <Card.Header>{username}</Card.Header>
-                <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
-                <Card.Description>
-                    {body}
-                </Card.Description>
+                {loading ? (
+                    <p>Loading Data...</p>
+                ) : (
+                    <>
+                        <Card.Header as={Link} to={`/profiles/${data.getUserProfile.id}`}>{username}</Card.Header>
+                        <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
+                        <Card.Description>
+                            {body}
+                        </Card.Description>
+                    </>
+                )}
+
             </Card.Content>
             <Card.Content extra>
                 {/* Like Button */}
@@ -45,7 +65,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
 
                 {/* Edit Button */}
                 {user && user.username === username && (
-                    <EditButton postId={id} body={body}/>
+                    <EditButton postId={id} body={body} />
                 )}
 
 
@@ -58,5 +78,16 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
         </Card>
     )
 }
+
+const FETCH_USER_PROFILE = gql`
+    query getUserProfile($username: String!) {
+        getUserProfile(username: $username) {
+            id
+            username
+            email
+            phone
+        }
+    }
+`
 
 export default PostCard;
