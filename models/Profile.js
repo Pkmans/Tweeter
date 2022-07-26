@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const profileSchema = new mongoose.Schema({
     bio: String,
@@ -12,4 +12,4 @@ const profileSchema = new mongoose.Schema({
     relationship: String
 })
 
-module.exports = mongoose.model('Profile', profileSchema);
+export default mongoose.model('Profile', profileSchema);

@@ -1,6 +1,6 @@
-const user = require("../models/User");
+import user from "../models/User.js";
 
-module.exports.validateRegisterInput = (
+export const validateRegisterInput = (
     username, email, password, confirmPassword
 ) => {
     const errors = {};
@@ -35,7 +35,7 @@ module.exports.validateRegisterInput = (
     }
 }
 
-module.exports.validateLoginInput = (username, password) => {
+export const validateLoginInput = (username, password) => {
     const errors = {};
 
     if (username.trim() === '') {

@@ -1,6 +1,8 @@
-const {gql} = require('apollo-server');
+import { gql } from 'apollo-server-express';
 
-module.exports = gql`
+export default gql`
+    scalar Upload
+
     type Post {
         id: ID!
         body: String!
@@ -10,6 +12,9 @@ module.exports = gql`
         comments: [Comment]!
         likeCount: Int!
         commentCount: Int!
+    }
+    type File {
+        url: String!
     }
     type Profile {
         id: ID!
@@ -65,5 +70,6 @@ module.exports = gql`
         createProfile(username: String!, email: String!): Profile!
         editProfile(profileId: ID!, section: String!, body: String!): Profile!
         editMultipleProfile(profileId: ID!, phone: String!, email: String!, birthDate: String!): Profile!
+        uploadFile(file: Upload!): File!
     }
 `;

@@ -1,8 +1,8 @@
-const { UserInputError, AuthenticationError } = require('apollo-server');
-const Post = require('../../models/Post');
-const checkAuth = require('../../utils/check-auth');
+import { UserInputError, AuthenticationError } from 'apollo-server-express';
+import Post from '../../models/Post.js';
+import checkAuth from '../../utils/check-auth.js';
 
-module.exports = {
+export default {
     Mutation: {
         async createComment(_, { postId, body }, context) {
             const { username } = checkAuth(context);

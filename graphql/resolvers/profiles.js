@@ -1,8 +1,7 @@
-const Profile = require('../../models/Profile');
-const checkAuth = require('../../utils/check-auth');
+import Profile from '../../models/Profile.js';
+import checkAuth from '../../utils/check-auth.js';
 
-
-module.exports = {
+export default {
     Query: {
         async getProfile(_, { profileId }) {
             try {

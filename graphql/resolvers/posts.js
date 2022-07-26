@@ -1,10 +1,9 @@
-const { AuthenticationError, UserInputError } = require('apollo-server');
-const Post = require('../../models/Post');
-const User = require('../../models/User');
-const checkAuth = require('../../utils/check-auth');
+import { AuthenticationError, UserInputError } from 'apollo-server-express';
+import Post from '../../models/Post.js';
+import User from '../../models/User.js';
+import checkAuth from '../../utils/check-auth.js';
 
-
-module.exports = {
+export default {
     Query: {
         async getPosts() {
             try {
@@ -27,21 +26,6 @@ module.exports = {
                 throw new Error(err);
             }
         },
-
-        // async getPostUser(_, {postId}) {
-        //     try {
-        //         const post = await Post.findOne({ _id: postId });
-        //         if (post) {
-        //             console.log(post.user);
-        //             return 'nice';
-        //             // return post.user;
-        //         } else {
-        //             throw new Error ("Post not found");
-        //         }
-        //     } catch (err) {
-        //         throw new Error(err);
-        //     }
-        // }
     },
 
     Mutation: {

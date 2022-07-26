@@ -23,6 +23,7 @@ function Login() {
             navigate('/');
         },
         onError(err) {
+            console.log("error: ", err);
             setErrors(err.graphQLErrors[0].extensions.errors);
         },
         variables: values

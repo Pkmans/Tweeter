@@ -1,22 +1,48 @@
-const { ApolloServer } = require('apollo-server');
-const mongoose = require('mongoose');
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
+import mongoose from 'mongoose';
+import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
+import cors from 'cors';
 
-const { MONGODB } = require('./config');
-const typeDefs = require('./graphql/typeDefs');
-const resolvers = require('./graphql/resolvers');
+import { MONGODB } from './config.js';
+import typeDefs from './graphql/typeDefs.js';
+import resolvers from './graphql/resolvers/index.js';
 
+async function startServer() {
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: ({req}) => ({req})
-})
-
-mongoose.connect(MONGODB)
-    .then(() => {
-        console.log("MongoDB connected successfully");
-        return server.listen({ port: 5000 })
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        context: ({ req }) => ({ req }),
+        csrfPrevention: false
+        // cors: {
+        //     origin: ['http://localhost:5000/graphql', 'http://localhost:5000/']
+        // }
     })
-    .then(({ url }) => {
-        console.log(`🚀  Server ready at ${url}`);
-    });
+
+   
+
+    await server.start();
+
+    const app = express();
+
+    // This middleware should be added before calling `applyMiddleware`.
+    app.use(graphqlUploadExpress());
+
+    server.applyMiddleware({ app});
+
+    app.use(express.static('public'));
+
+    app.use(cors());
+
+    mongoose.connect(MONGODB)
+        .then(() => {
+            console.log("MongoDB connected successfully");
+            return app.listen({ port: 5000 })
+        })
+        .then(() => {
+            console.log(`🚀  Server ready at http://localhost:5000${server.graphqlPath}`);
+        });
+}
+
+startServer();

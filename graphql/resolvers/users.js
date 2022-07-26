@@ -1,11 +1,11 @@
-const { UserInputError } = require("apollo-server");
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import { UserInputError } from "apollo-server-express";
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const User = require('../../models/User');
-const Profile = require('../../models/Profile');
-const { validateRegisterInput, validateLoginInput } = require('../../utils/validators');
-const { SECRET_KEY } = require('../../config');
+import User from '../../models/User.js';
+import Profile from '../../models/Profile.js';
+import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
+import { SECRET_KEY } from '../../config.js';
 
 function generateToken(user) {
     return jwt.sign({
@@ -16,7 +16,7 @@ function generateToken(user) {
     }, SECRET_KEY, { expiresIn: "1h" })
 }
 
-module.exports = {
+export default {
     Query: {
         async getUserProfile(_, { username }) {
             console.log('query called');
