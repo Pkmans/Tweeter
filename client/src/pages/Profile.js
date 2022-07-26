@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import { Button, Card, Icon, Label, Grid, Image, Form } from 'semantic-ui-react';
@@ -9,6 +9,7 @@ import EditButtonMultiple from "../components/EditButtonMultiple";
 
 function Profile() {
     const { profileId } = useParams();
+    const { user } = useContext(AuthContext);
 
     const { data: { getProfile } = {}, error } = useQuery(FETCH_PROFILE_QUERY, {
         variables: { profileId }
@@ -38,12 +39,14 @@ function Profile() {
                     <Card fluid className="card">
                         <Card.Content>
                             <Card.Header>
-                                {username}
-                                <EditButtonMultiple
-                                    body={{ phone, email, birthDate }}
-                                    profileId={id}
-                                    className='profile-edit-button'
-                                />
+                                {user.username === username && (
+                                    <EditButtonMultiple
+                                        body={{ phone, email, birthDate }}
+                                        profileId={id}
+                                        className='profile-edit-button'
+                                    />
+                                )}
+
                             </Card.Header>
                             <Card.Meta></Card.Meta>
                             <Card.Description>Phone: {phone}</Card.Description>
@@ -56,7 +59,9 @@ function Profile() {
                         <Card.Content>
                             <Card.Header>
                                 About Me
-                                <EditButton className='profile-edit-button' profileId={id} section='bio' body={bio} />
+                                {user.username === username && (
+                                    <EditButton className='profile-edit-button' profileId={id} section='bio' body={bio} />
+                                )}
                             </Card.Header>
                             <Card.Description>{bio}</Card.Description>
                         </Card.Content>
@@ -70,7 +75,9 @@ function Profile() {
                                     <Card.Content>
                                         <Card.Header>
                                             Education
-                                            <EditButton className='profile-edit-button' profileId={id} section='school' body={school} />
+                                            {user.username === username && (
+                                                <EditButton className='profile-edit-button' profileId={id} section='school' body={school} />
+                                            )}
                                         </Card.Header>
                                         <Card.Description>{school}</Card.Description>
                                     </Card.Content>
@@ -82,7 +89,9 @@ function Profile() {
                                     <Card.Content>
                                         <Card.Header>
                                             Where I live
-                                            <EditButton className='profile-edit-button' profileId={id} section='location' body={location} />
+                                            {user.username === username && (
+                                                <EditButton className='profile-edit-button' profileId={id} section='location' body={location} />
+                                            )}
                                         </Card.Header>
                                         <Card.Description>{location}</Card.Description>
                                     </Card.Content>
@@ -94,7 +103,9 @@ function Profile() {
                                     <Card.Content>
                                         <Card.Header>
                                             Relationship Status
-                                            <EditButton className='profile-edit-button' profileId={id} section='relationship' body={relationship} />
+                                            {user.username === username && (
+                                                <EditButton className='profile-edit-button' profileId={id} section='relationship' body={relationship} />
+                                            )}
                                         </Card.Header>
                                         <Card.Description>{relationship}</Card.Description>
                                     </Card.Content>
