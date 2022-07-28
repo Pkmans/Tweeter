@@ -31,7 +31,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
             <Card.Content>
                 <Image
                     className='profile-picture'
-                    floated='right'
+                    floated='left'
                     size='mini'
                     src='https://react.semantic-ui.com/images/avatar/large/molly.png'
                 />
@@ -66,7 +66,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
 
                 {/* Edit Button */}
                 {user && user.username === username && (
-                    <EditButton postId={id} body={body} />
+                    <EditButton postId={id} body={body} header='Editing Post' />
                 )}
 
 

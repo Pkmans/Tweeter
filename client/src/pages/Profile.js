@@ -61,6 +61,7 @@ function Profile() {
 
                                 {user.username === username && (
                                     <EditButtonMultiple
+                                        header='Details'
                                         body={{ phone, email, birthDate }}
                                         profileId={id}
                                         className='profile-edit-button'
@@ -80,7 +81,13 @@ function Profile() {
                             <Card.Header>
                                 About Me
                                 {user.username === username && (
-                                    <EditButton className='profile-edit-button' profileId={id} section='bio' body={bio} />
+                                    <EditButton 
+                                    header='About Me'
+                                    body={bio} 
+                                    className='profile-edit-button' 
+                                    profileId={id} 
+                                    section='bio' 
+                                    />
                                 )}
                             </Card.Header>
                             <Card.Description>{bio}</Card.Description>
@@ -92,7 +99,12 @@ function Profile() {
                             <Card.Header>
                                 Education
                                 {user.username === username && (
-                                    <EditButton className='profile-edit-button' profileId={id} section='school' body={school} />
+                                    <EditButton 
+                                    header='Education'
+                                    className='profile-edit-button' 
+                                    profileId={id} 
+                                    section='school' 
+                                    body={school} />
                                 )}
                             </Card.Header>
                             <Card.Description>{school}</Card.Description>
@@ -108,7 +120,7 @@ function Profile() {
                                         <Card.Header>
                                             Relationship Status
                                             {user.username === username && (
-                                                <EditButton className='profile-edit-button' profileId={id} section='relationship' body={relationship} />
+                                                <EditButton header='Relationship Status' className='profile-edit-button' profileId={id} section='relationship' body={relationship} />
                                             )}
                                         </Card.Header>
                                         <Card.Description>{relationship}</Card.Description>
@@ -122,7 +134,7 @@ function Profile() {
                                         <Card.Header>
                                             Where I live
                                             {user.username === username && (
-                                                <EditButton className='profile-edit-button' profileId={id} section='location' body={location} />
+                                                <EditButton header='Where I live' className='profile-edit-button' profileId={id} section='location' body={location} />
                                             )}
                                         </Card.Header>
                                         <Card.Description>{location}</Card.Description>

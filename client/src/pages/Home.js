@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useQuery } from '@apollo/client';
-import { Grid, Transition } from 'semantic-ui-react'
+import { Grid, Transition, Icon } from 'semantic-ui-react'
 
 import { AuthContext } from '../context/auth';
 import PostForm from '../components/PostForm';
@@ -28,7 +28,7 @@ function Home() {
             <Grid.Row>
 
                 {loading ? (
-                    <p>Loading Posts...</p>
+                    <Icon loading name='spinner' size='big'/>
                 ) : (
                     <Transition.Group>
                         {data.getPosts && data.getPosts.map(post => (

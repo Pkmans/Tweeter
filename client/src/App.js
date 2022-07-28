@@ -20,7 +20,7 @@ export const ThemeContext = createContext(null);
 
 function App() {
 
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
 
   function toggleTheme() {
     setTheme(prevValue => prevValue === 'light' ? 'dark' : 'light');
@@ -33,6 +33,9 @@ function App() {
           <Router>
             <Container>
               <MenuBar />
+              <Switch onChange={toggleTheme} checked={theme === 'dark' ? true : false}
+                uncheckedIcon={false} checkedIcon={false}
+              />
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/login" element={<AuthRoute />}>
@@ -44,9 +47,6 @@ function App() {
                 <Route exact path="/posts/:postId" element={<SinglePost />} />
                 <Route exact path="/profiles/:profileId" element={<Profile />} />
               </Routes>
-              <Switch onChange={toggleTheme} checked={theme === 'dark' ? true : false}
-                uncheckedIcon={false} checkedIcon={false}
-              />
             </Container>
           </Router>
         </AuthProvider>

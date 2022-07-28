@@ -4,7 +4,7 @@ import { gql, useMutation } from '@apollo/client';
 
 import useForm from "../utils/hooks";
 
-function EditButton({ postId, body, profileId, section, className}) {
+function EditButton({ postId, body, profileId, section, className, header}) {
     const [open, setOpen] = useState(false);
     const { onChange, onSubmit, values } = useForm(editCallback, {
         body
@@ -36,15 +36,15 @@ function EditButton({ postId, body, profileId, section, className}) {
                 </Button>
             }
         >
-            <Modal.Header content='Editing Post' />
-            <Modal.Content>
+            <Modal.Header className='modal-components' content={header} />
+            <Modal.Content className='modal-components'>
                 <Form>
-                    <Form.Field>
+                    <Form.Field >
                         <Form.Input label='Post message' type='text' name='body' onChange={onChange} value={values.body} />
                     </Form.Field>
                 </Form>
             </Modal.Content>
-            <Modal.Actions>
+            <Modal.Actions className='modal-components'>
                 <Button color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
                 <Button type="submit" color="green" icon="save" content="Save" />
             </Modal.Actions>
