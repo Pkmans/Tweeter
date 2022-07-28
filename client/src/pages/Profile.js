@@ -1,37 +1,55 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
-import { Button, Card, Icon, Label, Grid, Image, Form } from 'semantic-ui-react';
+import { Card, Grid, Image } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
 import EditButton from "../components/EditButton";
 import EditButtonMultiple from "../components/EditButtonMultiple";
+import UploadForm from "../components/UploadForm";
+import { FETCH_PROFILE_QUERY } from '../utils/graphql';
+
 
 function Profile() {
     const { profileId } = useParams();
     const { user } = useContext(AuthContext);
 
-    const { data: { getProfile } = {}, error } = useQuery(FETCH_PROFILE_QUERY, {
-        variables: { profileId }
-    })
 
-    if (error) {
-        throw new Error(error);
-    }
+
+    const { data: { getProfile } = {}, error } = useQuery(FETCH_PROFILE_QUERY, {
+        onError(err) {
+            throw new Error(err);
+        },
+        variables: { profileId }
+    });
+
 
     let profileMarkup;
     if (!getProfile) {
         profileMarkup = <p>Loading profile...</p>
     } else {
-        const { id, username, email, bio, phone, school, location, birthDate, relationship } = getProfile;
-
-        console.log(relationship);
+        const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfile;
 
         profileMarkup = (
             <Grid>
                 {/* Profile Picture */}
                 <Grid.Column width={3}>
-                    <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                    <Grid.Row>
+                        {/* <Card fluid className="card">
+                            <Card.Content> */}
+                                {!picture ? (
+                                    <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                                ) : (
+                                    <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${picture}`} alt='image' />
+                                )}
+
+                                {username === user.username && (
+                                    <UploadForm username={username} profileId={id} />
+                                )}
+                            {/* </Card.Content>
+                        </Card> */}
+                    </Grid.Row>
+
                 </Grid.Column>
 
                 {/* Profile Descriptions */}
@@ -122,21 +140,5 @@ function Profile() {
 
     return profileMarkup;
 }
-
-const FETCH_PROFILE_QUERY = gql`
-    query getProfile($profileId: ID!) {
-        getProfile(profileId: $profileId) {
-            id
-            username
-            email
-            bio
-            phone
-            school
-            location
-            birthDate
-            relationship
-        }
-    }
-`
 
 export default Profile;

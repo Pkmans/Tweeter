@@ -14,13 +14,7 @@ async function startServer() {
         typeDefs,
         resolvers,
         context: ({ req }) => ({ req }),
-        csrfPrevention: false
-        // cors: {
-        //     origin: ['http://localhost:5000/graphql', 'http://localhost:5000/']
-        // }
     })
-
-   
 
     await server.start();
 
@@ -32,7 +26,6 @@ async function startServer() {
     server.applyMiddleware({ app});
 
     app.use(express.static('public'));
-
     app.use(cors());
 
     mongoose.connect(MONGODB)

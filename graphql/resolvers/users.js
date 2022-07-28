@@ -23,8 +23,6 @@ export default {
             try {
                 const user = await User.findOne({username });
                 const profile = await Profile.findOne({_id: user.profile})
-                // console.log("profile is ", user.profile);
-                // console.log(profile);
                 
                 if (user) {
                     return profile;
@@ -96,7 +94,8 @@ export default {
                 location: '',
                 bio: '',
                 birthDate: '',
-                relationship: ''
+                relationship: '',
+                picture: ''
             })
 
             const profile = await newProfile.save();

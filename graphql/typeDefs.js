@@ -15,6 +15,7 @@ export default gql`
     }
     type File {
         url: String!
+        filename: String!
     }
     type Profile {
         id: ID!
@@ -26,6 +27,7 @@ export default gql`
         bio: String!
         birthDate: String!
         relationship: String!
+        picture: String!
     }
     type Like {
         id: ID!
@@ -70,6 +72,6 @@ export default gql`
         createProfile(username: String!, email: String!): Profile!
         editProfile(profileId: ID!, section: String!, body: String!): Profile!
         editMultipleProfile(profileId: ID!, phone: String!, email: String!, birthDate: String!): Profile!
-        uploadFile(file: Upload!): File!
+        uploadFile(file: Upload!, username: String!, profileId: ID!): File!
     }
 `;

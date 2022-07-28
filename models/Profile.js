@@ -9,7 +9,8 @@ const profileSchema = new mongoose.Schema({
     location: String,
     createdAt: String,
     birthDate: String,
-    relationship: String
+    relationship: String,
+    picture: String
 })
 
 export default mongoose.model('Profile', profileSchema);

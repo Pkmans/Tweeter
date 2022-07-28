@@ -15,7 +15,6 @@ import Register from './pages/Register';
 import MenuBar from './components/MenuBar';
 import SinglePost from './pages/SinglePost';
 import Profile from './pages/Profile';
-import UploadForm from './components/UploadForm';
 
 export const ThemeContext = createContext(null);
 
@@ -48,7 +47,6 @@ function App() {
               <Switch onChange={toggleTheme} checked={theme === 'dark' ? true : false}
                 uncheckedIcon={false} checkedIcon={false}
               />
-              <UploadForm />
             </Container>
           </Router>
         </AuthProvider>

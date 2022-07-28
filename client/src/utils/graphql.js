@@ -21,3 +21,20 @@ export const FETCH_POSTS_QUERY = gql`
         }
     }
 `
+
+export const FETCH_PROFILE_QUERY = gql`
+    query getProfile($profileId: ID!) {
+        getProfile(profileId: $profileId) {
+            id
+            username
+            email
+            bio
+            phone
+            school
+            location
+            birthDate
+            relationship
+            picture
+        }
+    }
+`
