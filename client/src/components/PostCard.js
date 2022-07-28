@@ -30,6 +30,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
         <Card fluid className='postcard'>
             <Card.Content>
                 <Image
+                    className='profile-picture'
                     floated='right'
                     size='mini'
                     src='https://react.semantic-ui.com/images/avatar/large/molly.png'

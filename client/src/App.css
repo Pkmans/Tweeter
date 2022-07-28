@@ -34,6 +34,10 @@
 }
 
 /* Profile Page */
+.profile.card {
+  margin-bottom: 1.5rem;
+}
+
 .profile-edit-button {
   position: absolute;
   right: 1rem;
@@ -60,16 +64,23 @@ input[type="file"] {
   cursor: pointer;
 }
 
+/* Grid */
+
+.page-container {
+  margin: auto !important;
+  width: 68rem;
+}
+
+/* Cards */
+.ui.card {
+  word-wrap: break-word
+}
+
 
 
 /* ---------- Light mode & Dark mode styling ---------- */
 
 /* --- Light --- */
-#light {
-  background-color: white;
-  min-height: 1080px;
-}
-
 #light .ui.label, #light .ui.pointing.label:before, #light .ui.button {
   transition: none !important;
 }

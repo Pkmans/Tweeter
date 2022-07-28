@@ -35,9 +35,9 @@ function SinglePost() {
         const { id, username, body, createdAt, likes, likeCount, comments, commentCount } = getPost;
 
         postMarkup = (
-            <Grid>
+            <Grid className='page-container'>
                 <Grid.Column width={3}>
-                    <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                    <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                 </Grid.Column>
                 <Grid.Column width={13}>
                     <Card fluid className="card">
@@ -50,7 +50,7 @@ function SinglePost() {
                             <LikeButton post={{ id, likes, likeCount }} />
 
                             <Button as="div" labelPosition='right'>
-                                <Button basic color='blue'>
+                                <Button size='tiny' basic color='blue'>
                                     <Icon name='comments' />
                                 </Button>
                                 <Label as='a' basic color='blue' pointing='left'>

@@ -21,6 +21,9 @@ function Login() {
         update(_, result) {
             context.login(result.data.login);
             navigate('/');
+
+            // Refresh page to trigger Menu Bar active item to home
+            navigate(0);                          
         },
         onError(err) {
             console.log("error: ", err);
@@ -68,6 +71,7 @@ function Login() {
                     </ul>
                 </div>
             )}
+
         </div>
     )
 }
