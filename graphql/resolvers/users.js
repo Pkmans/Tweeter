@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
 import Profile from '../../models/Profile.js';
 import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
-import { SECRET_KEY } from '../../config.js';
+import 'dotenv/config';
 
 function generateToken(user) {
     return jwt.sign({
@@ -13,13 +13,12 @@ function generateToken(user) {
         email: user.email,
         username: user.username,
         profile: user.profile.toString()
-    }, SECRET_KEY, { expiresIn: "1h" })
+    }, process.env.SECRET_KEY, { expiresIn: "1h" })
 }
 
 export default {
     Query: {
         async getUserProfile(_, { username }) {
-            console.log('query called');
             try {
                 const user = await User.findOne({username });
                 const profile = await Profile.findOne({_id: user.profile})

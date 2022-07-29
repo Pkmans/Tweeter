@@ -1,5 +1,3 @@
-import user from "../models/User.js";
-
 export const validateRegisterInput = (
     username, email, password, confirmPassword
 ) => {

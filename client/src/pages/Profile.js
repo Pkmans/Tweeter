@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import { Card, Grid, Image } from 'semantic-ui-react';
 
@@ -16,7 +16,7 @@ function Profile() {
 
 
 
-    const { data: { getProfile } = {}, error } = useQuery(FETCH_PROFILE_QUERY, {
+    const { data: { getProfile } = {}} = useQuery(FETCH_PROFILE_QUERY, {
         onError(err) {
             throw new Error(err);
         },

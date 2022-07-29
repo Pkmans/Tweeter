@@ -3,12 +3,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
 import cors from 'cors';
+import 'dotenv/config';
 
-import { MONGODB } from './config.js';
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
 
 async function startServer() {
+
+    const MONGODB = 'mongodb+srv://admin-aaron:dz4QyDNd6nma9eKO@cluster0.vjl4y.mongodb.net/tweeterDB?retryWrites=true&w=majority';
 
     const server = new ApolloServer({
         typeDefs,

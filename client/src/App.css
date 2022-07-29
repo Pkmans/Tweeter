@@ -92,9 +92,9 @@ input[type="file"] {
   min-height: 1080px;
 }
 
-/* #dark .modal-components {
+#dark .modal-components {
   background-color: rgb(173, 173, 173) !important;
-} */
+}
 
 /* Menu Bar */
 #dark .item {

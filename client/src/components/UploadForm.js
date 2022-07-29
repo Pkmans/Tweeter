@@ -32,7 +32,7 @@ function UploadForm({ profileId, username }) {
 
     return (
         <div className='profile-pic-button'>
-            <label for='file-upload' class='custom-file-upload'>
+            <label htmlFor='file-upload' className='custom-file-upload'>
                 <Icon name='picture'/> Change Picture
             </label>
             <input type='file' onChange={handleFileChange} id="file-upload" style={{ width: 200 }} />
