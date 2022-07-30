@@ -81,6 +81,10 @@ input[type="file"] {
 /* ---------- Light mode & Dark mode styling ---------- */
 
 /* --- Light --- */
+#light {
+  min-height: 100vh;
+}
+
 #light .ui.label, #light .ui.pointing.label:before, #light .ui.button {
   transition: none !important;
 }
@@ -89,7 +93,7 @@ input[type="file"] {
 
 #dark {
   background-color: #1e1f20;
-  min-height: 1080px;
+  min-height: 100vh;
 }
 
 #dark .modal-components {

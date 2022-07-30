@@ -36,9 +36,11 @@ function SinglePost() {
 
         postMarkup = (
             <Grid className='page-container'>
+            
                 <Grid.Column width={3}>
                     <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                 </Grid.Column>
+
                 <Grid.Column width={13}>
                     <Card fluid className="card">
                         <Card.Content>
@@ -63,6 +65,7 @@ function SinglePost() {
                             )}
                         </Card.Content>
                     </Card>
+                    
                     {user && (
                         <Card fluid>
                             <Card.Content>
@@ -114,6 +117,7 @@ function SinglePost() {
                         )
                     })}
                 </Grid.Column>
+                
             </Grid>
         )
     }

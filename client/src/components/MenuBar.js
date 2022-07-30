@@ -8,11 +8,13 @@ import jwtDecode from 'jwt-decode';
 
 function MenuBar() {
     const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const pathname = window.location.pathname;
     const path = pathname === '/' ? 'home' : pathname.substring(1);
+
     const [activeItem, setActiveItem] = useState(path);
 
-    const navigate = useNavigate();
 
     function handleItemClick(e, { name }) {
         setActiveItem(name)
@@ -28,6 +30,7 @@ function MenuBar() {
         setActiveItem('home');
     }
 
+    // Decode token for profile navigation
     const token = localStorage.getItem('jwtToken');
     let decodedToken = null;
     if (token) {
@@ -45,6 +48,7 @@ function MenuBar() {
                         as={Link}
                         to='/'
                     />
+
                     <Menu.Menu position='right'>
                         <Menu.Item
                             name='profile'
@@ -58,7 +62,6 @@ function MenuBar() {
                             onClick={logoutHandler}
                         />
                     </Menu.Menu>
-
                 </Menu>
             ) : (
                 <Menu pointing secondary size='massive' color='teal'>

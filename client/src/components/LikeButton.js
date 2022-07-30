@@ -15,15 +15,14 @@ function LikeButton({ postId, likes, likeCount, commentId }) {
     useEffect(() => {
         if (user && likes.find(like => like.username === user.username)) {
             setLiked(true);
-        } else {
-            setLiked(false);
-        }
+        } else setLiked(false);
     }, [likes, user]);
 
     const [likePostorComment] = useMutation(mutation, {
         variables: { postId, commentId }
     })
 
+    // Show filled or outlined button
     const likeButton = user ? (
         liked ? (
             <Button size='tiny' color='teal'>
@@ -44,7 +43,6 @@ function LikeButton({ postId, likes, likeCount, commentId }) {
         <MyPopup content="Like Post">
             <Button as='div' labelPosition='right' onClick={likePostorComment}>
                 {likeButton}
-
                 <Label basic color='teal' pointing='left'>
                     {likeCount}
                 </Label>

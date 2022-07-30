@@ -8,13 +8,16 @@ import MyPopup from "../utils/MyPopup";
 
 function DeleteButton({ postId, callback, commentId }) {
     const [confirmOpen, setConfirmOpen] = useState(false);
-    const {theme} = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
 
     const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
 
     const [deletePostorComment] = useMutation(mutation, {
+        
+        // Update client-side cache to remove deleted post 
         update(proxy) {
             setConfirmOpen(false);
+
             if (!commentId) {
                 const data = proxy.readQuery({
                     query: FETCH_POSTS_QUERY,
@@ -33,8 +36,13 @@ function DeleteButton({ postId, callback, commentId }) {
     return (
         <>
             <MyPopup content='Delete Post'>
-                <Button size='tiny' basic={theme === 'dark'} color='red' floated='right' onClick={() => setConfirmOpen(true)}>
-                    <Icon name='trash'/>
+                <Button size='tiny'
+                    basic={theme === 'dark'}
+                    color='red'
+                    floated='right'
+                    onClick={() => setConfirmOpen(true)}
+                >
+                    <Icon name='trash' />
                 </Button>
             </MyPopup>
 

@@ -9,9 +9,6 @@ function ThemeProvider(props) {
         setTheme(prevValue => prevValue === 'light' ? 'dark' : 'light');
     }
 
-    console.log("theme is", theme);
-
-
     return (
 
         <ThemeContext.Provider 

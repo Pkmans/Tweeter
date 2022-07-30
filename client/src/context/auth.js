@@ -5,6 +5,7 @@ const initialState = {
     user: null
 }
 
+// Check if auth token is expired
 if (localStorage.getItem('jwtToken')) {
     const decodedToken = jwtDecode(localStorage.getItem('jwtToken'));
 
@@ -17,8 +18,11 @@ if (localStorage.getItem('jwtToken')) {
 
 const AuthContext = createContext({
     user: null,
-    // login: (userData) => {},
-    // logout: () => {}
+
+    /* Technically not needed, but good for visualizing what functions
+    the context can call from the reducer */
+    login: (userData) => {},
+    logout: () => {}
 }); 
 
 function authReducer(state, action) {

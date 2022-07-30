@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Form, Button, Icon } from "semantic-ui-react";
 import { gql, useMutation } from '@apollo/client';
 
 import useForm from "../utils/hooks";
+import { ThemeContext } from "../App";
 
 function EditButton({ postId, body, profileId, section, className, header}) {
     const [open, setOpen] = useState(false);
+    const { theme } = useContext(ThemeContext);
+
     const { onChange, onSubmit, values } = useForm(editCallback, {
         body
     })
@@ -31,12 +34,15 @@ function EditButton({ postId, body, profileId, section, className, header}) {
             onOpen={() => setOpen(true)}
             open={open}
             trigger={
-                <Button className={className} size='tiny' color='instagram'>
+                <Button basic={theme === 'dark'} className={className} size='tiny' color='blue'>
                     <Icon name='pencil' />
                 </Button>
             }
         >
+            {/* Header */}
             <Modal.Header className='modal-components' content={header} />
+
+            {/* Content */}
             <Modal.Content className='modal-components'>
                 <Form>
                     <Form.Field >
@@ -44,13 +50,14 @@ function EditButton({ postId, body, profileId, section, className, header}) {
                     </Form.Field>
                 </Form>
             </Modal.Content>
+
+            {/* Actions */}
             <Modal.Actions className='modal-components'>
                 <Button color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
                 <Button type="submit" color="green" icon="save" content="Save" />
             </Modal.Actions>
 
         </Modal>
-
     );
 }
 

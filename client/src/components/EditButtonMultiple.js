@@ -36,7 +36,10 @@ function EditButtonMultiple({ postId, body, profileId, className, header}) {
                 </Button>
             }
         >
+            {/* Header */}
             <Modal.Header className='modal-components' content={header} />
+
+            {/* Content */}
             <Modal.Content className='modal-components'>
                 <Form>
                     <Form.Field>
@@ -46,13 +49,14 @@ function EditButtonMultiple({ postId, body, profileId, className, header}) {
                     </Form.Field>
                 </Form>
             </Modal.Content>
+
+            {/* Actions */}
             <Modal.Actions className='modal-components'>
                 <Button color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
                 <Button type="submit" color="green" icon="save" content="Save" />
             </Modal.Actions>
 
         </Modal>
-
     );
 }
 

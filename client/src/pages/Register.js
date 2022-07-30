@@ -7,22 +7,20 @@ import { AuthContext } from "../context/auth";
 import useForm from "../utils/hooks";
 
 function Register() {
-    const context = useContext(AuthContext);
     const [errors, setErrors] = useState({});
+    const {login} = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const { onChange, onSubmit, values } = useForm(registerUser, {
+    const { onChange, onSubmit, values } = useForm(registerUserCallback, {
         username: '',
         email: '',
         password: '',
         confirmPassword: ''
     });
 
-    // Mutation
-
-    const [addUser, { loading }] = useMutation(REGISTER_USER, {
+    const [registerUser, { loading }] = useMutation(REGISTER_USER, {
         update(_, result) {
-            context.login(result.data.register);
+            login(result.data.register);
             navigate('/');
         },
         onError(err) {
@@ -31,10 +29,8 @@ function Register() {
         variables: values
     })
 
-    // Callback Function
-
-    function registerUser() {
-        addUser();
+    function registerUserCallback() {
+        registerUser();
     }
 
     return (

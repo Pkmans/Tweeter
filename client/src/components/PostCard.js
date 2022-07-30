@@ -14,17 +14,8 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
     const { user } = useContext(AuthContext);
 
     const { loading, data } = useQuery(FETCH_USER_PROFILE, {
-        update() {
-            console.log("User profile has successfully been fetched");
-        },
         variables: { username }
     })
-
-    // if(data) {
-    //     console.log("data is: ", data.getUserProfile);
-    // } else {
-    //     console.log('no data');
-    // }
 
     return (
         <Card fluid className='postcard'>
@@ -35,6 +26,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                     size='mini'
                     src='https://react.semantic-ui.com/images/avatar/large/molly.png'
                 />
+
                 {loading ? (
                     <p>Loading Data...</p>
                 ) : (
@@ -46,8 +38,8 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                         </Card.Description>
                     </>
                 )}
-
             </Card.Content>
+
             <Card.Content extra>
                 {/* Like Button */}
                 <LikeButton postId={id} likes={likes} likeCount={likeCount} />
@@ -76,6 +68,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                 )}
 
             </Card.Content>
+            
         </Card>
     )
 }

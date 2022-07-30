@@ -1,32 +1,29 @@
 import React, { useContext } from "react";
 import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
-import { Card, Grid, Image } from 'semantic-ui-react';
+import { Card, Grid, Image, Icon } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
-import EditButton from "../components/EditButton";
 import EditButtonMultiple from "../components/EditButtonMultiple";
 import UploadForm from "../components/UploadForm";
 import { FETCH_PROFILE_QUERY } from '../utils/graphql';
+import ProfileCard from '../components/ProfileCard';
 
 
 function Profile() {
     const { profileId } = useParams();
     const { user } = useContext(AuthContext);
 
-
-
-    const { data: { getProfile } = {}} = useQuery(FETCH_PROFILE_QUERY, {
+    const { data: { getProfile } = {} } = useQuery(FETCH_PROFILE_QUERY, {
         onError(err) {
             throw new Error(err);
         },
         variables: { profileId }
     });
 
-
     let profileMarkup;
     if (!getProfile) {
-        profileMarkup = <p>Loading profile...</p>
+        profileMarkup = <Icon loading name='spinner' size='big' />
     } else {
         const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfile;
 
@@ -35,8 +32,6 @@ function Profile() {
                 {/* Profile Picture */}
                 <Grid.Column width={4}>
                     <Grid.Row>
-                        {/* <Card fluid className="card">
-                            <Card.Content> */}
                         {!picture ? (
                             <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         ) : (
@@ -46,10 +41,7 @@ function Profile() {
                         {username === user.username && (
                             <UploadForm username={username} profileId={id} />
                         )}
-                        {/* </Card.Content>
-                        </Card> */}
                     </Grid.Row>
-
                 </Grid.Column>
 
                 {/* Profile Descriptions */}
@@ -58,7 +50,6 @@ function Profile() {
                         <Card.Content>
                             <Card.Header>
                                 Details
-
                                 {user.username === username && (
                                     <EditButtonMultiple
                                         header='Details'
@@ -67,7 +58,6 @@ function Profile() {
                                         className='profile-edit-button'
                                     />
                                 )}
-
                             </Card.Header>
                             <Card.Meta></Card.Meta>
                             <Card.Description>Phone: {phone}</Card.Description>
@@ -76,78 +66,48 @@ function Profile() {
                         </Card.Content>
                     </Card>
 
-                    <Card fluid className="card profile">
-                        <Card.Content>
-                            <Card.Header>
-                                About Me
-                                {user.username === username && (
-                                    <EditButton 
-                                    header='About Me'
-                                    body={bio} 
-                                    className='profile-edit-button' 
-                                    profileId={id} 
-                                    section='bio' 
-                                    />
-                                )}
-                            </Card.Header>
-                            <Card.Description>{bio}</Card.Description>
-                        </Card.Content>
-                    </Card>
+                    <ProfileCard
+                        user={user}
+                        username={username}
+                        header='About Me'
+                        description={bio}
+                        section='bio'
+                        profileId={id}
+                    />
 
-                    <Card fluid className="card profile">
-                        <Card.Content>
-                            <Card.Header>
-                                Education
-                                {user.username === username && (
-                                    <EditButton 
-                                    header='Education'
-                                    className='profile-edit-button' 
-                                    profileId={id} 
-                                    section='school' 
-                                    body={school} />
-                                )}
-                            </Card.Header>
-                            <Card.Description>{school}</Card.Description>
-                        </Card.Content>
-                    </Card>
+                    <ProfileCard
+                        user={user}
+                        username={username}
+                        header='Education'
+                        description={school}
+                        section='school'
+                        profileId={id}
+                    />
 
-                    {/* 1 Row 3 column Split */}
                     <Grid>
                         <Grid.Row columns={2}>
                             <Grid.Column>
-                                <Card fluid className="card profile">
-                                    <Card.Content>
-                                        <Card.Header>
-                                            Relationship Status
-                                            {user.username === username && (
-                                                <EditButton header='Relationship Status' className='profile-edit-button' profileId={id} section='relationship' body={relationship} />
-                                            )}
-                                        </Card.Header>
-                                        <Card.Description>{relationship}</Card.Description>
-                                    </Card.Content>
-                                </Card>
+                                <ProfileCard
+                                    user={user}
+                                    username={username}
+                                    header='Relationship Status'
+                                    description={relationship}
+                                    section='relationship'
+                                    profileId={id}
+                                />
                             </Grid.Column>
-
                             <Grid.Column>
-                                <Card fluid className="card profile">
-                                    <Card.Content>
-                                        <Card.Header>
-                                            Where I live
-                                            {user.username === username && (
-                                                <EditButton header='Where I live' className='profile-edit-button' profileId={id} section='location' body={location} />
-                                            )}
-                                        </Card.Header>
-                                        <Card.Description>{location}</Card.Description>
-                                    </Card.Content>
-                                </Card>
+                                <ProfileCard
+                                    user={user}
+                                    username={username}
+                                    header='Where I live'
+                                    description={location}
+                                    section='location'
+                                    profileId={id}
+                                />
                             </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-
                         </Grid.Row>
                     </Grid>
-                    {/* 1 Row 3 column Split */}
-
                 </Grid.Column>
             </Grid>
         )

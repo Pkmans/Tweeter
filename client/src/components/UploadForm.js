@@ -7,6 +7,8 @@ import { FETCH_PROFILE_QUERY } from '../utils/graphql';
 function UploadForm({ profileId, username }) {
 
     const [uploadFile] = useMutation(UPLOAD_FILE, {
+        
+        // Update client-side cache to display uploaded file
         update(proxy, result) {
             const data = proxy.readQuery({
                 query: FETCH_PROFILE_QUERY,
@@ -23,7 +25,6 @@ function UploadForm({ profileId, username }) {
     })
 
     function handleFileChange(e) {
-        console.log(e.target.files[0]);
         const file = e.target.files[0];
         if (!file) return;
 

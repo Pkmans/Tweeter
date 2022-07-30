@@ -8,8 +8,8 @@ import { AuthContext } from "../context/auth";
 import useForm from "../utils/hooks";
 
 function Login() {
-    const context = useContext(AuthContext);
     const [errors, setErrors] = useState({});
+    const context = useContext(AuthContext);
     const navigate = useNavigate();
 
     const {onChange, onSubmit, values} = useForm(loginUserCallback, {
@@ -26,7 +26,6 @@ function Login() {
             navigate(0);                          
         },
         onError(err) {
-            console.log("error: ", err);
             setErrors(err.graphQLErrors[0].extensions.errors);
         },
         variables: values
@@ -35,7 +34,6 @@ function Login() {
     function loginUserCallback() {
         loginUser();
     }
-
 
     return (
         <div className="form-container">
