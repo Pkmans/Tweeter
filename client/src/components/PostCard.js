@@ -50,7 +50,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
             </Card.Content>
             <Card.Content extra>
                 {/* Like Button */}
-                <LikeButton post={{ id, likes, likeCount }} />
+                <LikeButton postId={id} likes={likes} likeCount={likeCount} />
 
                 {/* Comment Button */}
                 <MyPopup content='Comment on Post'>

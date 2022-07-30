@@ -6,19 +6,22 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 import MyPopup from "../utils/MyPopup";
 
-function LikeButton({ post: { id, likes, likeCount } }) {
+function LikeButton({ postId, likes, likeCount, commentId }) {
     const [liked, setLiked] = useState(false);
-
     const { user } = useContext(AuthContext);
+
+    const mutation = commentId ? LIKE_COMMENT_MUTATION : LIKE_POST_MUTATION;
 
     useEffect(() => {
         if (user && likes.find(like => like.username === user.username)) {
             setLiked(true);
-        } else setLiked(false);
+        } else {
+            setLiked(false);
+        }
     }, [likes, user]);
 
-    const [likePost] = useMutation(LIKE_POST_MUTATION, {
-        variables: { postId: id }
+    const [likePostorComment] = useMutation(mutation, {
+        variables: { postId, commentId }
     })
 
     const likeButton = user ? (
@@ -39,9 +42,9 @@ function LikeButton({ post: { id, likes, likeCount } }) {
 
     return (
         <MyPopup content="Like Post">
-            <Button as='div' labelPosition='right' onClick={likePost}>
+            <Button as='div' labelPosition='right' onClick={likePostorComment}>
                 {likeButton}
-                
+
                 <Label basic color='teal' pointing='left'>
                     {likeCount}
                 </Label>
@@ -62,6 +65,20 @@ const LIKE_POST_MUTATION = gql`
         }
     }
 
+`
+
+const LIKE_COMMENT_MUTATION = gql`
+    mutation likeComment($postId: ID!, $commentId: ID!) {
+        likeComment(postId: $postId, commentId: $commentId){
+            id
+            likes{
+                id
+                username
+                createdAt
+            }
+            likeCount
+        }
+    }
 `
 
 export default LikeButton;

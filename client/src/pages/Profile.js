@@ -38,7 +38,7 @@ function Profile() {
                         {/* <Card fluid className="card">
                             <Card.Content> */}
                         {!picture ? (
-                            <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                            <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         ) : (
                             <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${picture}`} alt='image' />
                         )}

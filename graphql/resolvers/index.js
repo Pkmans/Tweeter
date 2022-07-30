@@ -9,9 +9,13 @@ import fileuploadsResolvers from './fileuploads.js';
 export default {
     /* Find out how this part works */
     Upload: GraphQLUpload,
+    Comment: {
+        likeCount: (parent) => parent.likes.length,
+    },
     Post: {
         likeCount: (parent) => parent.likes.length,
         commentCount: (parent) => parent.comments.length
+        
     },
     Query: {
         ...postsResolvers.Query,

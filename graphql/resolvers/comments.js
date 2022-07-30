@@ -1,4 +1,5 @@
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
+import e from 'cors';
 import Post from '../../models/Post.js';
 import checkAuth from '../../utils/check-auth.js';
 
@@ -26,7 +27,7 @@ export default {
                 })
                 await post.save();
                 return post;
-            } else throw new UserInputError("Post not found");
+            } else throw new UserInputError('Post not found');
 
         },
 
@@ -41,8 +42,32 @@ export default {
                     post.comments.splice(commentIndex, 1);
                     await post.save();
                     return post;
-                } else throw new AuthenticationError("Action not allowed");
-            } else throw new UserInputError("Post not found");
+                } else throw new AuthenticationError('Action not allowed');
+            } else throw new UserInputError('Post not found');
+        },
+
+        async likeComment(_, { postId, commentId }, context) {
+            const { username } = checkAuth(context);
+
+            const post = await Post.findById(postId);
+
+            if (post) {
+                const commentIndex = post.comments.findIndex(c => c._id.toString() === commentId);
+
+                if (post.comments[commentIndex].likes.find(likes => likes.username === username)) {
+                    // Comment already liked, unlike it
+                    post.comments[commentIndex].likes = post.comments[commentIndex].likes.filter(likes => likes.username !== username);
+                } else {
+                    // Comment not liked, like it
+                    post.comments[commentIndex].likes.push({
+                        username,
+                        createdAt: new Date().toISOString()
+                    })
+                }
+                await post.save();
+                return post.comments[commentIndex];
+            } else throw new UserInputError('Post not found');
         }
+
     }
 }

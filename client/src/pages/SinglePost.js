@@ -47,7 +47,7 @@ function SinglePost() {
                             <Card.Description>{body}</Card.Description>
                         </Card.Content>
                         <Card.Content>
-                            <LikeButton post={{ id, likes, likeCount }} />
+                            <LikeButton postId={id} likes={likes} likeCount={likeCount} />
 
                             <Button as="div" labelPosition='right'>
                                 <Button size='tiny' basic color='blue'>
@@ -91,7 +91,7 @@ function SinglePost() {
                         </Card>
                     )}
 
-                    {comments.map((comment) => {
+                    {comments.map((comment) => {                        
                         return (
                             <Card fluid key={comment.id}>
                                 <Card.Content>
@@ -101,6 +101,14 @@ function SinglePost() {
                                     <Card.Header>{comment.username}</Card.Header>
                                     <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
                                     <Card.Description>{comment.body}</Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <LikeButton
+                                        postId={id}
+                                        likes={comment.likes}
+                                        likeCount={comment.likeCount}
+                                        commentId={comment.id}
+                                    />
                                 </Card.Content>
                             </Card>
                         )
@@ -122,6 +130,11 @@ const CREATE_COMMENT_MUTATION = gql`
                 body 
                 createdAt 
                 username
+                likes{
+                    id
+                    username
+                }
+                likeCount
             }
             commentCount
         }
@@ -145,6 +158,11 @@ const FETCH_POST_QUERY = gql`
                 username
                 body
                 createdAt
+                likes{
+                    id
+                    username
+                }
+                likeCount
             }
             commentCount
         }

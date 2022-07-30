@@ -28,7 +28,7 @@ function Home() {
             <Grid.Row>
 
                 {loading ? (
-                    <Icon loading name='spinner' size='big'/>
+                    <Icon loading name='spinner' size='big' />
                 ) : (
                     <Transition.Group>
                         {data.getPosts && data.getPosts.map(post => (

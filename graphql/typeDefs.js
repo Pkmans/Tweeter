@@ -39,6 +39,8 @@ export default gql`
         username: String!
         body: String!
         createdAt: String!
+        likes: [Like]!
+        likeCount: Int!
     }
     type User{
         id: ID!
@@ -67,6 +69,7 @@ export default gql`
         editPost(postId: ID!, body: String!): Post!
         deletePost(postId: ID!): String!
         likePost(postId: ID!): Post!
+        likeComment(postId: ID!, commentId: ID!): Comment!
         createComment(postId: ID!, body: String!): Post!
         deleteComment(postId: ID!, commentId: ID!): Post!
         createProfile(username: String!, email: String!): Profile!
