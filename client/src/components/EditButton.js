@@ -34,7 +34,7 @@ function EditButton({ postId, body, profileId, section, className, header}) {
             onOpen={() => setOpen(true)}
             open={open}
             trigger={
-                <Button basic={theme === 'dark'} className={className} size='tiny' color='blue'>
+                <Button className={className} size='tiny' color='instagram'>
                     <Icon name='pencil' />
                 </Button>
             }
