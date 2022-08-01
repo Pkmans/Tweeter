@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { Button, Card, Comment, Container, Header, Icon, Label, Grid, Image, Form, Transition } from 'semantic-ui-react';
 import moment from 'moment';
@@ -55,7 +55,7 @@ function SinglePost() {
                 <Grid.Column width={13}>
                     <Card fluid className='card'>
                         <Card.Content>
-                            <Card.Header>{username}</Card.Header>
+                            <Card.Header as={Link} to={`/profiles/${username}`}>{username}</Card.Header>
                             <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
                             <Card.Description>{body}</Card.Description>
                         </Card.Content>

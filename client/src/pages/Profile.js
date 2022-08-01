@@ -6,26 +6,26 @@ import { Card, Grid, Image, Icon } from 'semantic-ui-react';
 import { AuthContext } from '../context/auth';
 import EditButtonMultiple from "../components/EditButtonMultiple";
 import UploadForm from "../components/UploadForm";
-import { FETCH_PROFILE_QUERY } from '../utils/graphql';
+import { FETCH_USER_PROFILE } from '../utils/graphql';
 import ProfileCard from '../components/ProfileCard';
 
 
 function Profile() {
-    const { profileId } = useParams();
+    const { username } = useParams();
     const { user } = useContext(AuthContext);
 
-    const { data: { getProfileById } = {} } = useQuery(FETCH_PROFILE_QUERY, {
+    const { data: { getProfileByUsername } = {} } = useQuery(FETCH_USER_PROFILE, {
         onError(err) {
             throw new Error(err);
         },
-        variables: { profileId }
+        variables: { username }
     });
 
     let profileMarkup;
-    if (!getProfileById) {
+    if (!getProfileByUsername) {
         profileMarkup = <Icon loading name='spinner' size='big' />
     } else {
-        const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfileById;
+        const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfileByUsername;
 
         profileMarkup = (
             <Grid className='page-container'>

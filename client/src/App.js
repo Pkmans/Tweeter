@@ -45,7 +45,7 @@ function App() {
                   <Route exact path="/register" element={<Register />} />
                 </Route>
                 <Route exact path="/posts/:postId" element={<SinglePost />} />
-                <Route exact path="/profiles/:profileId" element={<Profile />} />
+                <Route exact path="/profiles/:username" element={<Profile />} />
               </Routes>
             </Container>
           </Router>

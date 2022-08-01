@@ -41,7 +41,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                             />
                         )}
 
-                        <Card.Header as={Link} to={`/profiles/${data.getProfileByUsername.id}`}>{username}</Card.Header>
+                        <Card.Header as={Link} to={`/profiles/${username}`}>{username}</Card.Header>
                         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
                         <Card.Description>
                             {body}

@@ -49,7 +49,12 @@ export const FETCH_USER_PROFILE = gql`
             id
             username
             email
+            bio
             phone
+            school
+            location
+            birthDate
+            relationship
             picture
         }
     }

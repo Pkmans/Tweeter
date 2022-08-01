@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client'
 import { Comment, Icon } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 import DeleteButton from './DeleteButton';
@@ -29,7 +30,7 @@ function CommentCustom(props) {
             )}
 
             <Comment.Content>
-                <Comment.Author>{c.username}</Comment.Author>
+                <Comment.Author as={Link} to={`/profiles/${c.username}`}>{c.username}</Comment.Author>
                 <Comment.Metadata>
                     <div>{moment(c.createdAt).fromNow()}</div>
                     <div>

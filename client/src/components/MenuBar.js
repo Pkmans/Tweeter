@@ -20,31 +20,20 @@ function MenuBar() {
         setActiveItem(name)
     };
 
-    function handleItemClickLoggedIn(e) {
-        setActiveItem('home')
-    }
-
     function logoutHandler() {
         logout();
         navigate('/');
         setActiveItem('home');
     }
 
-    // Decode token for profile navigation
-    const token = localStorage.getItem('jwtToken');
-    let decodedToken = null;
-    if (token) {
-        decodedToken = jwtDecode(token);
-    }
-
     return (
         <div className="menu-bar-container">
-            {user && token ? (
+            {user ? (
                 <Menu pointing secondary size='massive' color='teal'>
                     <Menu.Item
                         name={user.username}
                         active={activeItem === `home`}
-                        onClick={handleItemClickLoggedIn}
+                        onClick={() => setActiveItem('home')}
                         as={Link}
                         to='/'
                     />
@@ -55,7 +44,7 @@ function MenuBar() {
                             active={activeItem === 'profile'}
                             onClick={handleItemClick}
                             as={Link}
-                            to={`/profiles/${decodedToken.profile}`} /* TODO */
+                            to={`/profiles/${user.username}`}
                         />
                         <Menu.Item
                             name='logout'
