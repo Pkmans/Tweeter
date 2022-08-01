@@ -2,7 +2,7 @@
   margin-bottom: 2rem !important;
 }
 
-.home-page-title{
+.home-page-title {
   display: block !important;
   text-align: center;
 }
@@ -20,7 +20,8 @@
   margin-bottom: 1.5rem !important;
 }
 
-.ui.teal.button:focus, .ui.teal.buttons .button:focus {
+.ui.teal.button:focus,
+.ui.teal.buttons .button:focus {
   background-color: #00b5ad;
 }
 
@@ -43,7 +44,7 @@
   right: 1rem;
 }
 
-.profile-picture {  
+.profile-picture {
   border: 1px solid rgb(223, 222, 222);
   box-shadow: 0 0px 8px 2px rgb(0 0 0 / 7%), 0 0px 20px 4px rgb(0 0 0 / 5%);
   border-radius: 50%;
@@ -57,6 +58,7 @@
 input[type="file"] {
   display: none;
 }
+
 .custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;
@@ -76,16 +78,39 @@ input[type="file"] {
   word-wrap: break-word
 }
 
+/* Comment Section */
+.comment-like-button {
+  color: rgba(109, 109, 109, 0.534) !important;
+}
+
+.comment-like-button:hover {
+  /* color: rgba(31, 31, 31, 0.692) !important; */
+  filter: brightness(10%);
+}
+
+.comment-liked-button {
+  color: #20B2AA !important;
+}
+
+.comment-liked-button:hover {
+  /* color: rgba(31, 31, 31, 0.692) !important; */
+  filter: brightness(75%);
+}
 
 
-/* ---------- Light mode & Dark mode styling ---------- */
+/* -----------------------------------------*/
+/*---- LIGHT MODE & DARK MODE STYLING ------*/
+/* -----------------------------------------*/
+
 
 /* --- Light --- */
 #light {
   min-height: 100vh;
 }
 
-#light .ui.label, #light .ui.pointing.label:before, #light .ui.button {
+#light .ui.label,
+#light .ui.pointing.label:before,
+#light .ui.button {
   transition: none !important;
 }
 
@@ -115,7 +140,11 @@ input[type="file"] {
 }
 
 /* PostForm */
-#dark h1, #dark h2, #dark h3, #dark h4, #dark p {
+#dark h1,
+#dark h2,
+#dark h3,
+#dark h4,
+#dark p {
   color: rgb(223, 223, 223);
 }
 
@@ -124,11 +153,14 @@ input[type="file"] {
   background-color: #2a2b2c;
 }
 
-#dark .ui.card, .ui.cards>.card {
+#dark .ui.card,
+.ui.cards>.card {
   box-shadow: 0 1px 3px 0 #242526, 0 0 0 1px #242526;
 }
 
-#dark h1, #dark .header, #dark .description {
+#dark h1,
+#dark .header,
+#dark .description {
   color: rgb(223, 223, 223);
 }
 
@@ -137,20 +169,24 @@ input[type="file"] {
 
 }
 
-#dark .ui.card>.extra, .ui.cards>.card>.extra {
+#dark .ui.card>.extra,
+.ui.cards>.card>.extra {
   border-top-color: #434648 !important;
 }
 
 /* Like Button */
-#dark .ui.basic.teal.button, .ui.basic.teal.buttons .button{
+#dark .ui.basic.teal.button,
+.ui.basic.teal.buttons .button {
   color: #03645f !important;
 }
 
-#dark .ui.teal.button, .ui.teal.buttons .button {
+#dark .ui.teal.button,
+.ui.teal.buttons .button {
   background-color: #03645f;
 }
 
-#dark .ui.teal.button:focus, .ui.teal.buttons .button:focus {
+#dark .ui.teal.button:focus,
+.ui.teal.buttons .button:focus {
   background-color: #03645f;
 }
 
@@ -159,7 +195,9 @@ input[type="file"] {
   background-color: #2a2b2c !important;
 }
 
-#dark .ui.label, #dark .ui.pointing.label:before, #dark .ui.button {
+#dark .ui.label,
+#dark .ui.pointing.label:before,
+#dark .ui.button {
   transition: none !important;
 }
 
@@ -169,7 +207,8 @@ input[type="file"] {
 }
 
 /* Error messages */
-#dark .ui.attached.error.message, #dark .ui.error.message {
+#dark .ui.attached.error.message,
+#dark .ui.error.message {
   box-shadow: 0 0 0 1px #c4bbbb inset, 0 0 0 0 transparent;
 }
 
@@ -182,8 +221,7 @@ input[type="file"] {
 }
 
 /* Single Post Page */
-#dark .ui.card>.content, .ui.cards>.card>.content {
+#dark .ui.card>.content,
+.ui.cards>.card>.content {
   border-top: 1px solid #434648;
 }
-
-

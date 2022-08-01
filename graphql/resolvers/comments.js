@@ -20,7 +20,7 @@ export default {
             const post = await Post.findById(postId);
 
             if (post) {
-                post.comments.unshift({
+                post.comments.push({
                     body,
                     username,
                     createdAt: new Date().toISOString()

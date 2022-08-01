@@ -42,3 +42,30 @@ export const FETCH_PROFILE_QUERY = gql`
         }
     }
 `
+export const LIKE_POST_MUTATION = gql`
+    mutation likePost($postId: ID!) {
+        likePost(postId: $postId) {
+            id
+            likes{
+                id
+                username
+            }
+            likeCount
+        }
+    }
+
+`
+
+export const LIKE_COMMENT_MUTATION = gql`
+    mutation likeComment($postId: ID!, $commentId: ID!) {
+        likeComment(postId: $postId, commentId: $commentId){
+            id
+            likes{
+                id
+                username
+                createdAt
+            }
+            likeCount
+        }
+    }
+`

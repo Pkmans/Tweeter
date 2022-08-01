@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 import MyPopup from "../utils/MyPopup";
+import {LIKE_POST_MUTATION, LIKE_COMMENT_MUTATION} from '../utils/graphql';
+
 
 function LikeButton({ postId, likes, likeCount, commentId }) {
     const [liked, setLiked] = useState(false);
@@ -51,32 +53,6 @@ function LikeButton({ postId, likes, likeCount, commentId }) {
     )
 }
 
-const LIKE_POST_MUTATION = gql`
-    mutation likePost($postId: ID!) {
-        likePost(postId: $postId) {
-            id
-            likes{
-                id
-                username
-            }
-            likeCount
-        }
-    }
 
-`
-
-const LIKE_COMMENT_MUTATION = gql`
-    mutation likeComment($postId: ID!, $commentId: ID!) {
-        likeComment(postId: $postId, commentId: $commentId){
-            id
-            likes{
-                id
-                username
-                createdAt
-            }
-            likeCount
-        }
-    }
-`
 
 export default LikeButton;

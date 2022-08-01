@@ -6,14 +6,14 @@ import { FETCH_POSTS_QUERY } from "../utils/graphql";
 import { ThemeContext } from "../App";
 import MyPopup from "../utils/MyPopup";
 
-function DeleteButton({ postId, callback, commentId }) {
+function DeleteButton({ postId, callback, commentId, subtle }) {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const { theme } = useContext(ThemeContext);
 
     const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
 
     const [deletePostorComment] = useMutation(mutation, {
-        
+
         // Update client-side cache to remove deleted post 
         update(proxy) {
             setConfirmOpen(false);
@@ -33,26 +33,39 @@ function DeleteButton({ postId, callback, commentId }) {
         variables: { postId, commentId }
     })
 
-    return (
-        <>
-            <MyPopup content='Delete Post'>
-                <Button size='tiny'
-                    basic={theme === 'dark'}
-                    color='red'
-                    floated='right'
-                    onClick={() => setConfirmOpen(true)}
-                >
-                    <Icon name='trash' />
-                </Button>
-            </MyPopup>
-
-            <Confirm
-                open={confirmOpen}
-                onCancel={() => setConfirmOpen(false)}
-                onConfirm={deletePostorComment}
-            />
-        </>
+    const deleteButton = subtle ? (
+        <Button
+            as='div'
+            size='mini'
+            labelPosition='left'
+            onClick={() => setConfirmOpen(true)}
+            className='comment-like-button'
+        >
+            <div>Delete</div>
+        </Button>
+    ) : (
+        <MyPopup content='Delete Post'>
+            <Button size='tiny'
+                basic={theme === 'dark'}
+                color='red'
+                floated='right'
+                onClick={() => setConfirmOpen(true)}
+            >
+                <Icon name='trash' />
+            </Button>
+        </MyPopup>
     )
+
+
+    return <>
+        {deleteButton}
+
+        <Confirm
+            open={confirmOpen}
+            onCancel={() => setConfirmOpen(false)}
+            onConfirm={deletePostorComment}
+        />
+    </>
 
 }
 

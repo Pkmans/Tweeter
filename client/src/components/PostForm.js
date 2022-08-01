@@ -10,7 +10,6 @@ function PostForm() {
         body: ''
     })
 
-    
     const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
         
         // Update client-side cache to show created post 
