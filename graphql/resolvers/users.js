@@ -17,24 +17,6 @@ function generateToken(user) {
 }
 
 export default {
-    Query: {
-        async getUserProfile(_, { username }) {
-            try {
-                const user = await User.findOne({username });
-                const profile = await Profile.findOne({_id: user.profile})
-                
-                if (user) {
-                    return profile;
-                } else {
-                    throw new Error('User not found');
-                }
-            } catch (err) {
-                throw new Error(err);
-            }
-        }
-
-    },
-
     Mutation: {
         async login(_, { username, password }) {
             const { errors, valid } = validateLoginInput(username, password);

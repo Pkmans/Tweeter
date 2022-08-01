@@ -1,6 +1,7 @@
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
-import e from 'cors';
+
 import Post from '../../models/Post.js';
+import Profile from '../../models/Profile.js';
 import checkAuth from '../../utils/check-auth.js';
 
 export default {
@@ -25,6 +26,7 @@ export default {
                     username,
                     createdAt: new Date().toISOString()
                 })
+                console.log(post.comments);
                 await post.save();
                 return post;
             } else throw new UserInputError('Post not found');

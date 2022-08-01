@@ -1,5 +1,6 @@
 import { AuthenticationError, UserInputError } from 'apollo-server-express';
 import Post from '../../models/Post.js';
+import Profile from '../../models/Profile.js';
 import User from '../../models/User.js';
 import checkAuth from '../../utils/check-auth.js';
 

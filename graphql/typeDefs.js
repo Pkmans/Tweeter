@@ -58,9 +58,8 @@ export default gql`
     type Query {
         getPosts: [Post]
         getPost(postId: ID!): Post
-        # getPostUser(postId: ID!): String
-        getUserProfile(username: String!): Profile!
-        getProfile(profileId: ID!): Profile!
+        getProfileByUsername(username: String!): Profile!
+        getProfileById(profileId: ID!): Profile!
     }
     type Mutation {
         login(username: String!, password: String!): User!

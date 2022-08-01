@@ -27,8 +27,8 @@ export const FETCH_POSTS_QUERY = gql`
 `
 
 export const FETCH_PROFILE_QUERY = gql`
-    query getProfile($profileId: ID!) {
-        getProfile(profileId: $profileId) {
+    query getProfileById($profileId: ID!) {
+        getProfileById(profileId: $profileId) {
             id
             username
             email
@@ -38,6 +38,18 @@ export const FETCH_PROFILE_QUERY = gql`
             location
             birthDate
             relationship
+            picture
+        }
+    }
+`
+
+export const FETCH_USER_PROFILE = gql`
+    query getProfileByUsername($username: String!) {
+        getProfileByUsername(username: $username) {
+            id
+            username
+            email
+            phone
             picture
         }
     }

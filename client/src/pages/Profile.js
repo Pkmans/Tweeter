@@ -14,7 +14,7 @@ function Profile() {
     const { profileId } = useParams();
     const { user } = useContext(AuthContext);
 
-    const { data: { getProfile } = {} } = useQuery(FETCH_PROFILE_QUERY, {
+    const { data: { getProfileById } = {} } = useQuery(FETCH_PROFILE_QUERY, {
         onError(err) {
             throw new Error(err);
         },
@@ -22,20 +22,20 @@ function Profile() {
     });
 
     let profileMarkup;
-    if (!getProfile) {
+    if (!getProfileById) {
         profileMarkup = <Icon loading name='spinner' size='big' />
     } else {
-        const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfile;
+        const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfileById;
 
         profileMarkup = (
             <Grid className='page-container'>
                 {/* Profile Picture */}
                 <Grid.Column width={4}>
                     <Grid.Row>
-                        {!picture ? (
-                            <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
-                        ) : (
+                        {picture ? (
                             <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${picture}`} alt='image' />
+                        ) : (
+                            <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )}
 
                         {username === user.username && (

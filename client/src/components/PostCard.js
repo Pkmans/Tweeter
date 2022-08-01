@@ -9,8 +9,9 @@ import LikeButton from './LikeButton';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import MyPopup from '../utils/MyPopup';
+import {FETCH_USER_PROFILE} from '../utils/graphql';
 
-function PostCard({ post: { id, username, createdAt, body, likes, likeCount, comments, commentCount } }) {
+function PostCard({ post: { id, username, createdAt, body, likes, likeCount, commentCount } }) {
     const { user } = useContext(AuthContext);
 
     const { loading, data } = useQuery(FETCH_USER_PROFILE, {
@@ -20,18 +21,27 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
     return (
         <Card fluid className='postcard'>
             <Card.Content>
-                <Image
-                    className='profile-picture'
-                    floated='left'
-                    size='mini'
-                    src='https://react.semantic-ui.com/images/avatar/large/molly.png'
-                />
-
                 {loading ? (
-                    <p>Loading Data...</p>
+                    <Icon loading name='spinner' size='big' />
                 ) : (
                     <>
-                        <Card.Header as={Link} to={`/profiles/${data.getUserProfile.id}`}>{username}</Card.Header>
+                        {data.getProfileByUsername.picture ? (
+                            <Image
+                                className='profile-picture'
+                                floated='left'
+                                size='mini'
+                                src={`http://localhost:5000/images/${username}/${data.getProfileByUsername.picture}`}
+                            />
+                        ) : (
+                            <Image
+                                className='profile-picture'
+                                floated='left'
+                                size='mini'
+                                src={'https://react.semantic-ui.com/images/avatar/large/molly.png'}
+                            />
+                        )}
+
+                        <Card.Header as={Link} to={`/profiles/${data.getProfileByUsername.id}`}>{username}</Card.Header>
                         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
                         <Card.Description>
                             {body}
@@ -68,20 +78,9 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                 )}
 
             </Card.Content>
-            
+
         </Card>
     )
 }
-
-const FETCH_USER_PROFILE = gql`
-    query getUserProfile($username: String!) {
-        getUserProfile(username: $username) {
-            id
-            username
-            email
-            phone
-        }
-    }
-`
 
 export default PostCard;

@@ -1,15 +1,31 @@
 import Profile from '../../models/Profile.js';
+import User from '../../models/User.js';
 import checkAuth from '../../utils/check-auth.js';
 
 export default {
     Query: {
-        async getProfile(_, { profileId }) {
+        async getProfileById(_, { profileId }) {
             try {
                 const profile = await Profile.findOne({ _id: profileId });
                 if (profile) {
                     return profile;
                 } else {
                     throw new Error('Profile not found');
+                }
+            } catch (err) {
+                throw new Error(err);
+            }
+        },
+
+        async getProfileByUsername(_, { username }) {
+            try {
+                const user = await User.findOne({username });
+                const profile = await Profile.findOne({_id: user.profile})
+                
+                if (user) {
+                    return profile;
+                } else {
+                    throw new Error('User not found');
                 }
             } catch (err) {
                 throw new Error(err);
