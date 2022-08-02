@@ -1,6 +1,7 @@
 import { UserInputError } from "apollo-server-express";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import _ from 'lodash';
 
 import User from '../../models/User.js';
 import Profile from '../../models/Profile.js';
@@ -54,8 +55,10 @@ export default {
                 throw new UserInputError("Errors", { errors });
             }
 
+            // const capitalizedUsername = _.upperFirst(username);
+
             // Make sure user doesn't already exist
-            const user = await User.findOne({ username: username });
+            const user = await User.findOne({ username });
             if (user) {
                 throw new UserInputError("Username is taken", {
                     errors: {

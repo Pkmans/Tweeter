@@ -13,6 +13,11 @@ export default gql`
         likeCount: Int!
         commentCount: Int!
     }
+    type Stats {
+        likeCount: Int!
+        commentCount: Int!
+        postCount: Int!
+    }
     type File {
         url: String!
         filename: String!
@@ -60,6 +65,7 @@ export default gql`
         getPost(postId: ID!): Post
         getProfileByUsername(username: String!): Profile!
         getProfileById(profileId: ID!): Profile!
+        getStats(username: String!): Stats!
     }
     type Mutation {
         login(username: String!, password: String!): User!

@@ -86,3 +86,12 @@ export const LIKE_COMMENT_MUTATION = gql`
         }
     }
 `
+export const FETCH_STATS_QUERY = gql`
+    query getStats($username: String!) {
+        getStats(username: $username) {
+            likeCount
+            commentCount
+            postCount
+        }
+    }
+`

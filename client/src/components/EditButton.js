@@ -46,7 +46,7 @@ function EditButton({ postId, body, profileId, section, className, header}) {
             <Modal.Content className='modal-components'>
                 <Form>
                     <Form.Field >
-                        <Form.Input label='Post message' type='text' name='body' onChange={onChange} value={values.body} />
+                        <Form.Input label='Update to: ' type='text' name='body' onChange={onChange} value={values.body} />
                     </Form.Field>
                 </Form>
             </Modal.Content>

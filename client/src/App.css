@@ -30,12 +30,14 @@
 }
 
 /* Semantic UI Icons */
+
 .ui.button:not(.icon)>.icon:not(.button):not(.dropdown) {
   margin: 0;
 }
 
 /* Profile Page */
-.profile.card {
+
+.profile-card {
   margin-bottom: 1.5rem;
 }
 
@@ -74,11 +76,13 @@ input[type="file"] {
 }
 
 /* Cards */
+
 .ui.card {
   word-wrap: break-word
 }
 
 /* Comment Section */
+
 .comment-like-button {
   color: rgba(109, 109, 109, 0.534) !important;
 }
@@ -97,6 +101,9 @@ input[type="file"] {
   filter: brightness(75%);
 }
 
+.ui.comments {
+  max-width: none;
+}
 
 /* -----------------------------------------*/
 /*---- LIGHT MODE & DARK MODE STYLING ------*/

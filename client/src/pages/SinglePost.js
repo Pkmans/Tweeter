@@ -47,14 +47,18 @@ function SinglePost() {
                     {loading ? (
                         <Icon loading name='spinner' size='big' />
                     ) : (
-                        <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${getProfileByUsername.picture}`} alt='image' />
+                        getProfileByUsername.picture ? (
+                            <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${getProfileByUsername.picture}`} alt='image' />
+                        ) : (
+                            <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                        )
                     )}
                 </Grid.Column>
 
                 {/* Post Section */}
                 <Grid.Column width={13}>
-                    <Card fluid className='card'>
-                        <Card.Content>
+                    <Card fluid>
+                        <Card.Content >
                             <Card.Header as={Link} to={`/profiles/${username}`}>{username}</Card.Header>
                             <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
                             <Card.Description>{body}</Card.Description>
@@ -78,9 +82,9 @@ function SinglePost() {
                     </Card>
 
                     {/* Comments Section */}
-                    <Card fluid className='card'>
+                    <Card fluid>
                         <Card.Content>
-                            <Comment.Group>
+                            <Comment.Group size='large'>
                                 <Header as='h3' dividing>
                                     Comments
                                 </Header>

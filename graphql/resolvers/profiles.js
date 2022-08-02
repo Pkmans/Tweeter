@@ -1,4 +1,5 @@
 import Profile from '../../models/Profile.js';
+import Post from '../../models/Post.js';
 import User from '../../models/User.js';
 import checkAuth from '../../utils/check-auth.js';
 
@@ -27,6 +28,46 @@ export default {
                 } else {
                     throw new Error('User not found');
                 }
+            } catch (err) {
+                throw new Error(err);
+            }
+        },
+
+        async getStats(_, {username}) {
+            try {
+                const posts = await Post.find({});
+
+                let [likeCount, commentCount, postCount] = [0, 0, 0];
+
+                posts.forEach(post => {
+                    if (post.username === username) 
+                        postCount++;
+
+                    post.likes.forEach(like => {
+                        if (like.username === username) {
+                            likeCount++;
+                        }
+                    })
+
+                    post.comments.forEach(comment => {
+                        if (comment.username === username)
+                            commentCount++;
+                    }) 
+                });
+
+                console.log({likeCount, commentCount, postCount});
+
+                return {
+                    likeCount,
+                    commentCount,
+                    postCount
+                }
+
+                // for each post: 
+                //      -increase count if found a like with username
+                //      -increase count if found comment with username
+                //      -increase count if post is made by username
+
             } catch (err) {
                 throw new Error(err);
             }

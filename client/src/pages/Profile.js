@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
-import { Card, Grid, Image, Icon } from 'semantic-ui-react';
+import { Card, Grid, Image, Icon, Statistic } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
 import EditButtonMultiple from "../components/EditButtonMultiple";
 import UploadForm from "../components/UploadForm";
-import { FETCH_USER_PROFILE } from '../utils/graphql';
+import { FETCH_USER_PROFILE, FETCH_STATS_QUERY } from '../utils/graphql';
 import ProfileCard from '../components/ProfileCard';
 
 
@@ -15,11 +15,12 @@ function Profile() {
     const { user } = useContext(AuthContext);
 
     const { data: { getProfileByUsername } = {} } = useQuery(FETCH_USER_PROFILE, {
-        onError(err) {
-            throw new Error(err);
-        },
         variables: { username }
     });
+
+    const { data: { getStats } = {} } = useQuery(FETCH_STATS_QUERY, {
+        variables: { username }
+    })
 
     let profileMarkup;
     if (!getProfileByUsername) {
@@ -27,11 +28,20 @@ function Profile() {
     } else {
         const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfileByUsername;
 
+        const statsRow1 = [
+            { key: 'posts', label: 'Posts', value: `${getStats.postCount}` },
+            { key: 'likes', label: 'Likes', value: `${getStats.likeCount}`},
+            { key: 'comments', label: 'Comments', value: `${getStats.commentCount}` },
+        ]
+
+
         profileMarkup = (
             <Grid className='page-container'>
                 {/* Profile Picture */}
                 <Grid.Column width={4}>
                     <Grid.Row>
+                        <h1 style={{ textAlign: 'center' }}>{username}</h1>
+
                         {picture ? (
                             <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${picture}`} alt='image' />
                         ) : (
@@ -41,6 +51,10 @@ function Profile() {
                         {username === user.username && (
                             <UploadForm username={username} profileId={id} />
                         )}
+
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Statistic.Group size='small' items={statsRow1}/>
                     </Grid.Row>
                 </Grid.Column>
 
