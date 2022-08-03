@@ -9,6 +9,8 @@ function EditButton({ postId, body, profileId, section, className, header }) {
     const [open, setOpen] = useState(false);
     const { theme } = useContext(ThemeContext);
 
+    const isDarkTheme = theme === 'dark';
+
     const { onChange, onSubmit, values } = useForm(editCallback, {
         body
     })
@@ -28,29 +30,44 @@ function EditButton({ postId, body, profileId, section, className, header }) {
 
     return (
         <Modal
+            basic={isDarkTheme}
             as={Form}
             onSubmit={onSubmit}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button className={className} circular size='tiny' color='blue' icon='pencil' />}
+            size='tiny'
+            trigger={
+                <Button
+                    inverted={isDarkTheme}
+                    className={className}
+                    circular
+                    size='tiny'
+                    color='blue'
+                    icon='pencil'
+                />}
         >
             {/* Header */}
             <Modal.Header className='modal-components' content={header} />
 
             {/* Content */}
             <Modal.Content className='modal-components'>
-                <Form>
-                    <Form.Field >
-                        <Form.Input label='Update to: ' type='text' name='body' onChange={onChange} value={values.body} />
+                <Form inverted={isDarkTheme}>
+                    <Form.Field>
+                        <div className='field' >
+                            <label>Update to: </label>
+                            <div className='ui input'>
+                                <textarea name='body' type='text' value={values.body} onChange={onChange}/>
+                            </div>
+                        </div>
                     </Form.Field>
                 </Form>
             </Modal.Content>
 
             {/* Actions */}
             <Modal.Actions className='modal-components'>
-                <Button color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
-                <Button type="submit" color="green" icon="save" content="Save" />
+                <Button inverted={isDarkTheme} color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
+                <Button inverted={isDarkTheme} type="submit" color="green" icon="save" content="Save" />
             </Modal.Actions>
 
         </Modal>

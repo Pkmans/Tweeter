@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Container } from 'semantic-ui-react'
-import Switch from 'react-switch';
 
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -32,10 +31,7 @@ function App() {
         <AuthProvider>
           <Router>
             <Container>
-              <MenuBar />
-              <Switch onChange={toggleTheme} checked={theme === 'dark' ? true : false}
-                uncheckedIcon={false} checkedIcon={false}
-              />
+              <MenuBar onChange={toggleTheme} checked={theme === 'dark' ? true : false}/>
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/login" element={<AuthRoute />}>

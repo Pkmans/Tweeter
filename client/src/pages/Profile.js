@@ -4,15 +4,18 @@ import { useParams } from "react-router-dom";
 import { Card, Grid, Image, Icon, Statistic } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
+import { ThemeContext } from "../App";
 import EditButtonMultiple from "../components/EditButtonMultiple";
 import UploadForm from "../components/UploadForm";
 import { FETCH_USER_PROFILE, FETCH_STATS_QUERY } from '../utils/graphql';
 import ProfileCard from '../components/ProfileCard';
 
 
+
 function Profile() {
     const { username } = useParams();
     const { user } = useContext(AuthContext);
+    const { theme } = useContext(ThemeContext);
 
     const { data: { getProfileByUsername } = {} } = useQuery(FETCH_USER_PROFILE, {
         variables: { username }
@@ -58,7 +61,7 @@ function Profile() {
 
                     </Grid.Row>
                     <Grid.Row>
-                        <Statistic.Group size='small' items={statsRow1} />
+                        <Statistic.Group inverted={theme === 'dark'} size='small' items={statsRow1} />
                     </Grid.Row>
                 </Grid.Column>
 

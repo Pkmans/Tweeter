@@ -3,10 +3,9 @@ import { Menu } from 'semantic-ui-react'
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from "../context/auth";
-import jwtDecode from 'jwt-decode';
+import ThemeSwitch from './ThemeSwitch';
 
-
-function MenuBar() {
+function MenuBar({ onChange, checked }) {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -39,6 +38,10 @@ function MenuBar() {
                     />
 
                     <Menu.Menu position='right'>
+                        <Menu.Item>
+                            <ThemeSwitch onChange={onChange} checked={checked} />
+                        </Menu.Item>
+
                         <Menu.Item
                             name='profile'
                             active={activeItem === 'profile'}
@@ -63,6 +66,10 @@ function MenuBar() {
                     />
 
                     <Menu.Menu position='right'>
+                        <Menu.Item>
+                            <ThemeSwitch onChange={onChange} checked={checked} />
+                        </Menu.Item>
+                        
                         <Menu.Item
                             name='login'
                             active={activeItem === 'login'}

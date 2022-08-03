@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client'
 import { Comment, Icon } from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import DeleteButton from './DeleteButton';
@@ -9,11 +9,8 @@ import LikeButtonSubtle from '../components/LikeButtonSubtle';
 import { FETCH_USER_PROFILE } from '../utils/graphql';
 
 
-function CommentCustom(props) {
-
-    const {comment: c, postId} = props;
-
-    const { loading, data : {getProfileByUsername} = {} } = useQuery(FETCH_USER_PROFILE, {
+function CommentCustom({postId, comment: c, username, ...props}) {
+    const { loading, data: { getProfileByUsername } = {} } = useQuery(FETCH_USER_PROFILE, {
         variables: { username: c.username }
     })
 
@@ -41,20 +38,22 @@ function CommentCustom(props) {
                 <Comment.Actions>
                     <Comment.Action>
                         <LikeButtonSubtle
-                            postId={props.postId}
+                            postId={postId}
                             likes={c.likes}
                             likeCount={c.likeCount}
                             commentId={c.id}
                             subtle={true}
                         />
                     </Comment.Action>
-                    <Comment.Action>
-                        <DeleteButton
-                            postId={postId}
-                            commentId={c.id}
-                            subtle={true}
-                        />
-                    </Comment.Action>
+                    {username === c.username && (
+                        <Comment.Action>
+                            <DeleteButton
+                                postId={postId}
+                                commentId={c.id}
+                                subtle={true}
+                            />
+                        </Comment.Action>
+                    )}
                 </Comment.Actions>
             </Comment.Content>
         </Comment>

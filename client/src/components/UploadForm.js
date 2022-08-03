@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { Icon } from 'semantic-ui-react';
 
 import { FETCH_USER_PROFILE } from '../utils/graphql';
+import {ThemeContext} from '../App';
 
 function UploadForm({ profileId, username }) {
+    const {theme} = useContext(ThemeContext);
 
     const [uploadFile] = useMutation(UPLOAD_FILE, {
-        
+
         // Update client-side cache to display uploaded file
         update(proxy, result) {
             const data = proxy.readQuery({
@@ -34,7 +36,8 @@ function UploadForm({ profileId, username }) {
     return (
         <div className='profile-pic-button'>
             <label htmlFor='file-upload' className='custom-file-upload'>
-                <Icon name='picture'/> Change Picture
+                    <Icon inverted={theme === 'dark'} name='picture' /> 
+                    <p className='inline-text'>Change Picture</p>
             </label>
             <input type='file' onChange={handleFileChange} id="file-upload" style={{ width: 200 }} />
         </div>

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Form, Button } from "semantic-ui-react";
 import { gql, useMutation } from '@apollo/client';
 
 import useForm from "../utils/hooks";
+import { ThemeContext } from "../App";
 
-function EditButtonMultiple({ postId, body, profileId, className, header}) {
+
+function EditButtonMultiple({ postId, body, profileId, className, header }) {
+    const { theme } = useContext(ThemeContext);
     const [open, setOpen] = useState(false);
+
+    const isDarkTheme = theme === 'dark';
+
     const { onChange, onSubmit, values } = useForm(editCallback, {
         phone: body.phone,
         email: body.email,
@@ -25,19 +31,28 @@ function EditButtonMultiple({ postId, body, profileId, className, header}) {
 
     return (
         <Modal
+            basic={isDarkTheme}
             as={Form}
             onSubmit={onSubmit}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button className={className} size='tiny' color='blue' icon='pencil' circular />}
+            size='tiny'
+            trigger={
+                <Button
+                    inverted={isDarkTheme}
+                    className={className}
+                    size='tiny'
+                    color='blue'
+                    icon='pencil'
+                    circular />}
         >
             {/* Header */}
             <Modal.Header className='modal-components' content={header} />
 
             {/* Content */}
             <Modal.Content className='modal-components'>
-                <Form>
+                <Form inverted={isDarkTheme}>
                     <Form.Field>
                         <Form.Input label='Phone' type='text' name='phone' onChange={onChange} value={values.phone} />
                         <Form.Input label='Email' type='text' name='email' onChange={onChange} value={values.email} />
@@ -48,8 +63,8 @@ function EditButtonMultiple({ postId, body, profileId, className, header}) {
 
             {/* Actions */}
             <Modal.Actions className='modal-components'>
-                <Button color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
-                <Button type="submit" color="green" icon="save" content="Save" />
+                <Button inverted={isDarkTheme} color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
+                <Button inverted={isDarkTheme} type="submit" color="green" icon="save" content="Save" />
             </Modal.Actions>
 
         </Modal>

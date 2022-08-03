@@ -4,18 +4,21 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 import { Button, Card, Comment, Header, Icon, Label, Grid, Image, Form, Transition } from 'semantic-ui-react';
 import moment from 'moment';
 
+import { AuthContext } from '../context/auth';
+import { ThemeContext } from '../App';
 import LikeButton from '../components/LikeButton';
 import DeleteButton from '../components/DeleteButton';
 import CommentCustom from '../components/CommentCustom';
-import { AuthContext } from '../context/auth';
 import { FETCH_POST_PROFILE_QUERY } from '../utils/graphql';
 
 function SinglePost() {
-    const { postId } = useParams();
     const { user } = useContext(AuthContext);
+    const { theme } = useContext(ThemeContext);
+    const { postId } = useParams();
+
+    const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
     const navigate = useNavigate();
-    const [comment, setComment] = useState('');
 
     const { data: { getPost } = {} } = useQuery(FETCH_POST_QUERY, {
         variables: { postId }
@@ -91,7 +94,7 @@ function SinglePost() {
                                 <Transition.Group>
                                     {comments.map(c => {
                                         return (
-                                            <CommentCustom key={c.id} comment={c} postId={id} />
+                                            <CommentCustom key={c.id} comment={c} postId={id} username={user.username} />
                                         )
                                     })}
                                 </Transition.Group>
