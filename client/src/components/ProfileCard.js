@@ -13,7 +13,7 @@ function ProfileCard({user, username, header, description, profileId, section}) 
                         <EditButton
                             header={header}
                             body={description}
-                            className='profile-edit-button'
+                            className='edit-button'
                             profileId={profileId}
                             section={section}
                         />

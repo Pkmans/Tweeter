@@ -1,14 +1,14 @@
 import React, { useContext, useState, useRef } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
-import { Button, Card, Comment, Container, Header, Icon, Label, Grid, Image, Form, Transition } from 'semantic-ui-react';
+import { Button, Card, Comment, Header, Icon, Label, Grid, Image, Form, Transition } from 'semantic-ui-react';
 import moment from 'moment';
 
 import LikeButton from '../components/LikeButton';
 import DeleteButton from '../components/DeleteButton';
 import CommentCustom from '../components/CommentCustom';
 import { AuthContext } from '../context/auth';
-import { FETCH_USER_PROFILE } from '../utils/graphql';
+import { FETCH_POST_PROFILE_QUERY } from '../utils/graphql';
 
 function SinglePost() {
     const { postId } = useParams();
@@ -21,8 +21,8 @@ function SinglePost() {
         variables: { postId }
     })
 
-    const { loading, data: { getProfileByUsername } = {} } = useQuery(FETCH_USER_PROFILE, {
-        variables: { username: user.username }
+    const { loading, data: { getPostProfile } = {} } = useQuery(FETCH_POST_PROFILE_QUERY, {
+        variables: { postId }
     })
 
     const [createComment] = useMutation(CREATE_COMMENT_MUTATION, {
@@ -47,8 +47,8 @@ function SinglePost() {
                     {loading ? (
                         <Icon loading name='spinner' size='big' />
                     ) : (
-                        getProfileByUsername.picture ? (
-                            <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${getProfileByUsername.picture}`} alt='image' />
+                        getPostProfile.picture ? (
+                            <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${getPostProfile.picture}`} alt='image' />
                         ) : (
                             <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )

@@ -63,6 +63,7 @@ export default gql`
     type Query {
         getPosts: [Post]
         getPost(postId: ID!): Post
+        getPostProfile(postId: ID!): Profile!
         getProfileByUsername(username: String!): Profile!
         getProfileById(profileId: ID!): Profile!
         getStats(username: String!): Stats!

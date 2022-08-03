@@ -18,7 +18,7 @@ function Profile() {
         variables: { username }
     });
 
-    const { data: { getStats } = {} } = useQuery(FETCH_STATS_QUERY, {
+    const { loading, data: { getStats } = {} } = useQuery(FETCH_STATS_QUERY, {
         variables: { username }
     })
 
@@ -28,12 +28,16 @@ function Profile() {
     } else {
         const { id, username, email, bio, phone, school, location, birthDate, relationship, picture } = getProfileByUsername;
 
-        const statsRow1 = [
-            { key: 'posts', label: 'Posts', value: `${getStats.postCount}` },
-            { key: 'likes', label: 'Likes', value: `${getStats.likeCount}`},
-            { key: 'comments', label: 'Comments', value: `${getStats.commentCount}` },
-        ]
-
+        let statsRow1 = [];
+        if (loading) {
+            <Icon name='spinner' />
+        } else {
+            statsRow1 = [
+                { key: 'posts', label: 'Posts', value: `${getStats.postCount}` },
+                { key: 'likes', label: 'Likes', value: `${getStats.likeCount}` },
+                { key: 'comments', label: 'Comments', value: `${getStats.commentCount}` },
+            ]
+        }
 
         profileMarkup = (
             <Grid className='page-container'>
@@ -54,7 +58,7 @@ function Profile() {
 
                     </Grid.Row>
                     <Grid.Row>
-                        <Statistic.Group size='small' items={statsRow1}/>
+                        <Statistic.Group size='small' items={statsRow1} />
                     </Grid.Row>
                 </Grid.Column>
 
@@ -69,14 +73,14 @@ function Profile() {
                                         header='Details'
                                         body={{ phone, email, birthDate }}
                                         profileId={id}
-                                        className='profile-edit-button'
+                                        className='edit-button'
                                     />
                                 )}
                             </Card.Header>
                             <Card.Meta></Card.Meta>
-                            <Card.Description>Phone: {phone}</Card.Description>
-                            <Card.Description>Email: {email}</Card.Description>
-                            <Card.Description>Date of Birth: {birthDate}</Card.Description>
+                            <Card.Description><h4 style={{ display: 'inline-block' }}>Phone:</h4> {phone}</Card.Description>
+                            <Card.Description><h4 style={{ display: 'inline-block' }}>Email:</h4> {email}</Card.Description>
+                            <Card.Description><h4 style={{ display: 'inline-block' }}>Date of Birth:</h4> {birthDate}</Card.Description>
                         </Card.Content>
                     </Card>
 

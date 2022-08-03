@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Modal, Form, Button, Icon } from "semantic-ui-react";
+import { Modal, Form, Button } from "semantic-ui-react";
 import { gql, useMutation } from '@apollo/client';
 
 import useForm from "../utils/hooks";
 import { ThemeContext } from "../App";
 
-function EditButton({ postId, body, profileId, section, className, header}) {
+function EditButton({ postId, body, profileId, section, className, header }) {
     const [open, setOpen] = useState(false);
     const { theme } = useContext(ThemeContext);
 
@@ -33,11 +33,7 @@ function EditButton({ postId, body, profileId, section, className, header}) {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={
-                <Button className={className} size='tiny' color='instagram'>
-                    <Icon name='pencil' />
-                </Button>
-            }
+            trigger={<Button className={className} circular size='tiny' color='blue' icon='pencil' />}
         >
             {/* Header */}
             <Modal.Header className='modal-components' content={header} />

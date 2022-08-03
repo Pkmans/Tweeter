@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Form, Button, Icon } from "semantic-ui-react";
+import { Modal, Form, Button } from "semantic-ui-react";
 import { gql, useMutation } from '@apollo/client';
 
 import useForm from "../utils/hooks";
@@ -30,11 +30,7 @@ function EditButtonMultiple({ postId, body, profileId, className, header}) {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={
-                <Button className={className} size='tiny' color='instagram'>
-                    <Icon name='pencil' />
-                </Button>
-            }
+            trigger={<Button className={className} size='tiny' color='blue' icon='pencil' circular />}
         >
             {/* Header */}
             <Modal.Header className='modal-components' content={header} />

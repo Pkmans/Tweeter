@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { Icon } from 'semantic-ui-react';
 
-import { FETCH_PROFILE_QUERY } from '../utils/graphql';
+import { FETCH_USER_PROFILE } from '../utils/graphql';
 
 function UploadForm({ profileId, username }) {
 
@@ -11,12 +11,12 @@ function UploadForm({ profileId, username }) {
         // Update client-side cache to display uploaded file
         update(proxy, result) {
             const data = proxy.readQuery({
-                query: FETCH_PROFILE_QUERY,
-                variables: { profileId }
+                query: FETCH_USER_PROFILE,
+                variables: { username }
             })
             proxy.writeQuery({
-                query: FETCH_PROFILE_QUERY,
-                data: { getProfile: { ...data.getProfile, picture: result.data.uploadFile.filename } }
+                query: FETCH_USER_PROFILE,
+                data: { getProfileByUsername: { ...data.getProfileByUsername, picture: result.data.uploadFile.filename } }
             })
         },
         onCompleted(data) {

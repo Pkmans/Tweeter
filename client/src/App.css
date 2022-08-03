@@ -41,9 +41,10 @@
   margin-bottom: 1.5rem;
 }
 
-.profile-edit-button {
+.edit-button {
   position: absolute;
-  right: 1rem;
+  top: 0.8rem;
+  right: 0.8rem;
 }
 
 .profile-picture {

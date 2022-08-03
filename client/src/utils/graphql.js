@@ -59,6 +59,24 @@ export const FETCH_USER_PROFILE = gql`
         }
     }
 `
+
+export const FETCH_POST_PROFILE_QUERY = gql`
+    query getPostProfile($postId: ID!) {
+        getPostProfile(postId: $postId) {
+            id
+            username
+            email
+            bio
+            phone
+            school
+            location
+            birthDate
+            relationship
+            picture
+        }
+    }
+`
+
 export const LIKE_POST_MUTATION = gql`
     mutation likePost($postId: ID!) {
         likePost(postId: $postId) {

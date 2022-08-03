@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Card, Icon, Label, Image } from 'semantic-ui-react'
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import LikeButton from './LikeButton';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import MyPopup from '../utils/MyPopup';
-import {FETCH_USER_PROFILE} from '../utils/graphql';
+import { FETCH_USER_PROFILE } from '../utils/graphql';
 
 function PostCard({ post: { id, username, createdAt, body, likes, likeCount, commentCount } }) {
     const { user } = useContext(AuthContext);
@@ -41,7 +41,12 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                             />
                         )}
 
-                        <Card.Header as={Link} to={`/profiles/${username}`}>{username}</Card.Header>
+                        <Card.Header as={Link} to={`/profiles/${username}`}>
+                            {username}
+                        </Card.Header>
+                        {user && user.username === username && (
+                            <EditButton postId={id} body={body} header='Editing Post' className='edit-button' />
+                        )}
                         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
                         <Card.Description>
                             {body}
@@ -65,12 +70,6 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                         </Label>
                     </Button>
                 </MyPopup>
-
-                {/* Edit Button */}
-                {user && user.username === username && (
-                    <EditButton postId={id} body={body} header='Editing Post' />
-                )}
-
 
                 {/* Delete Button */}
                 {user && user.username === username && (

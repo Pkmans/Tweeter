@@ -33,6 +33,18 @@ export default {
             }
         },
 
+        async getPostProfile(_, {postId}) {
+            try {
+                const post = await Post.findOne({ _id: postId });
+                const profile = await Profile.findOne({username: post.username})
+
+                return profile;
+
+            } catch (err) {
+                throw new Error(err);
+            }
+        },
+
         async getStats(_, {username}) {
             try {
                 const posts = await Post.find({});
@@ -44,9 +56,8 @@ export default {
                         postCount++;
 
                     post.likes.forEach(like => {
-                        if (like.username === username) {
+                        if (like.username === username)
                             likeCount++;
-                        }
                     })
 
                     post.comments.forEach(comment => {
@@ -62,11 +73,6 @@ export default {
                     commentCount,
                     postCount
                 }
-
-                // for each post: 
-                //      -increase count if found a like with username
-                //      -increase count if found comment with username
-                //      -increase count if post is made by username
 
             } catch (err) {
                 throw new Error(err);
