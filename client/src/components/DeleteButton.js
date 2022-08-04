@@ -10,6 +10,8 @@ function DeleteButton({ postId, callback, commentId, subtle }) {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const { theme } = useContext(ThemeContext);
 
+    const isDarkTheme = theme === 'dark';
+
     const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
 
     const [deletePostorComment] = useMutation(mutation, {
@@ -60,10 +62,16 @@ function DeleteButton({ postId, callback, commentId, subtle }) {
     return <>
         {deleteButton}
 
-        <Confirm
+        <Confirm 
             open={confirmOpen}
             onCancel={() => setConfirmOpen(false)}
             onConfirm={deletePostorComment}
+            size='mini'
+            header='Confirm delete?'
+            content={null}
+            confirmButton='Yes'
+            basic={isDarkTheme}
+            style={{textAlign: 'center'}}
         />
     </>
 

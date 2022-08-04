@@ -14,7 +14,6 @@ function MenuBar({ onChange, checked }) {
 
     const [activeItem, setActiveItem] = useState(path);
 
-
     function handleItemClick(e, { name }) {
         setActiveItem(name)
     };
@@ -24,6 +23,11 @@ function MenuBar({ onChange, checked }) {
         navigate('/');
         setActiveItem('home');
     }
+
+    // After login or register, set Menu Bar active item to home
+    if (user && (activeItem === 'login' || activeItem === 'register')) {
+        setActiveItem('home');    
+    } 
 
     return (
         <div className="menu-bar-container">

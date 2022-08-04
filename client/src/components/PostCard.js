@@ -41,11 +41,11 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                             />
                         )}
 
-                        <Card.Header as={Link} to={`/profiles/${username}`}>
-                            {username}
+                        <Card.Header>
+                            <Link to={`/profiles/${username}`}>{username}</Link>
                         </Card.Header>
                         {user && user.username === username && (
-                            <EditButton postId={id} body={body} header='Editing Post' className='edit-button' />
+                            <EditButton postId={id} postBody={body} header='Editing Post' className='edit-button' />
                         )}
                         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
                         <Card.Description>

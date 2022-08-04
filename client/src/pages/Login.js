@@ -20,10 +20,7 @@ function Login() {
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         update(_, result) {
             context.login(result.data.login);
-            navigate('/');
-
-            // Refresh page to trigger Menu Bar active item to home
-            navigate(0);                          
+            navigate('/');                        
         },
         onError(err) {
             setErrors(err.graphQLErrors[0].extensions.errors);

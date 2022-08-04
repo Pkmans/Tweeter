@@ -52,7 +52,7 @@ function EditButtonMultiple({ postId, body, profileId, className, header }) {
 
             {/* Content */}
             <Modal.Content className='modal-components'>
-                <Form inverted={isDarkTheme}>
+                <Form as='div' inverted={isDarkTheme}>
                     <Form.Field>
                         <Form.Input label='Phone' type='text' name='phone' onChange={onChange} value={values.phone} />
                         <Form.Input label='Email' type='text' name='email' onChange={onChange} value={values.email} />

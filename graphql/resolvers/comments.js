@@ -26,7 +26,6 @@ export default {
                     username,
                     createdAt: new Date().toISOString()
                 })
-                console.log(post.comments);
                 await post.save();
                 return post;
             } else throw new UserInputError('Post not found');

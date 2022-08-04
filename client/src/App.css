@@ -116,6 +116,30 @@ input[type="file"] {
   display: inline;
 }
 
+/* Postcard Header & Metadata */
+.ui.card .header a{
+  color: black;
+}
+
+.ui.card .header a:hover{
+  text-decoration: underline;
+}
+
+.ui.card .meta:hover {
+  text-decoration: underline;
+}
+
+
+/* Comments Profile Link */
+.ui.comments .author {
+  color: black !important;
+}
+
+.ui.comments .author:hover {
+  text-decoration: underline;
+}
+
+
 
 
 /* -----------------------------------------*/
@@ -196,6 +220,17 @@ input[type="file"] {
 .ui.cards>.card>.extra {
   border-top-color: #434648 !important;
 }
+
+/* PostCard Header */
+#dark .ui.card .header a{
+  color: rgb(223, 223, 223);
+}
+
+/* Comments Profile Link */
+.ui.comments .author {
+  color: rgb(223, 223, 223) !important;
+}
+
 
 /* Like Button */
 #dark .ui.basic.teal.button,
@@ -280,6 +315,10 @@ input[type="file"] {
   border-radius: 50%;
 }
 
+/* Form Loading Spinner */
+#dark .ui.loading.form:before {
+  background: #1e1f205d !important;
+}
 
 
 /* Modals */

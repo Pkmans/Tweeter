@@ -61,9 +61,12 @@ function SinglePost() {
                 {/* Post Section */}
                 <Grid.Column width={13}>
                     <Card fluid>
-                        <Card.Content >
-                            <Card.Header as={Link} to={`/profiles/${username}`}>{username}</Card.Header>
-                            <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
+                        <Card.Content>
+                            <Card.Header>
+                                <Link as={Link} to={`/profiles/${username}`}>{username}</Link>
+                            </Card.Header>
+                            <Card.Meta>{moment(createdAt).fromNow(true)}
+                            </Card.Meta>
                             <Card.Description>{body}</Card.Description>
                         </Card.Content>
                         <Card.Content>

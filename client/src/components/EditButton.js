@@ -5,14 +5,14 @@ import { gql, useMutation } from '@apollo/client';
 import useForm from "../utils/hooks";
 import { ThemeContext } from "../App";
 
-function EditButton({ postId, body, profileId, section, className, header }) {
+function EditButton({ postId, postBody, profileId, section, className, header }) {
     const [open, setOpen] = useState(false);
     const { theme } = useContext(ThemeContext);
 
     const isDarkTheme = theme === 'dark';
 
     const { onChange, onSubmit, values } = useForm(editCallback, {
-        body
+        body: postBody
     })
 
     const mutation = profileId ? EDIT_PROFILE_MUTATION : EDIT_POST_MUTATION;
@@ -28,12 +28,17 @@ function EditButton({ postId, body, profileId, section, className, header }) {
         editPostorProfile();
     }
 
+    function handleClose() {
+        values.body = postBody;
+        setOpen(false);
+    }
+
     return (
         <Modal
             basic={isDarkTheme}
             as={Form}
             onSubmit={onSubmit}
-            onClose={() => setOpen(false)}
+            onClose={handleClose}
             onOpen={() => setOpen(true)}
             open={open}
             size='tiny'
@@ -52,22 +57,20 @@ function EditButton({ postId, body, profileId, section, className, header }) {
 
             {/* Content */}
             <Modal.Content className='modal-components'>
-                <Form inverted={isDarkTheme}>
-                    <Form.Field>
-                        <div className='field' >
-                            <label>Update to: </label>
-                            <div className='ui input'>
-                                <textarea name='body' type='text' value={values.body} onChange={onChange}/>
-                            </div>
+                <Form as='div'>
+                    <div className='field' >
+                        <label style={isDarkTheme ? { color: 'white' } : null}>Update to: </label>
+                        <div className='ui input'>
+                            <textarea name='body' type='text' value={values.body} onChange={onChange} />
                         </div>
-                    </Form.Field>
+                    </div>
                 </Form>
             </Modal.Content>
 
             {/* Actions */}
             <Modal.Actions className='modal-components'>
-                <Button inverted={isDarkTheme} color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
-                <Button inverted={isDarkTheme} type="submit" color="green" icon="save" content="Save" />
+                <Button color="grey" icon="times" content="Cancel" onClick={handleClose} />
+                <Button type="submit" color="blue" icon="save" content="Save" />
             </Modal.Actions>
 
         </Modal>
