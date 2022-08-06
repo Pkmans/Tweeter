@@ -11,7 +11,7 @@ function PostForm() {
     })
 
     const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
-        
+
         // Update client-side cache to show created post 
         update(proxy, result) {
             const data = proxy.readQuery({
@@ -35,14 +35,30 @@ function PostForm() {
             <Form onSubmit={onSubmit}>
                 <h2>Create post:</h2>
                 <Form.Field>
-                    <Form.Input
+                    {/* <Form.Input
                         placeholder="What's on your mind?"
                         name='body'
                         onChange={onChange}
                         value={values.body}
                         error={error ? true : false}
-                    />
-                    <Button type='submit' color='teal'>Post</Button>
+                    /> */}
+                    <div className='ui input fluid'>
+                        <textarea
+                            type='text'
+                            name='body'
+                            placeholder="What's on your mind?"
+                            value={values.body}
+                            onChange={onChange}
+                            rows='3'
+                        />
+                    </div>
+                    <Button
+                        type='submit'
+                        color='teal'
+                        disabled={values.body.trim() === ''}
+                    >
+                        Post
+                    </Button>
                 </Form.Field>
             </Form>
 

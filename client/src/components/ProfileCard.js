@@ -12,14 +12,14 @@ function ProfileCard({user, username, header, description, profileId, section}) 
                     {user.username === username && (
                         <EditButton
                             header={header}
-                            body={description}
+                            postBody={description}
                             className='edit-button'
                             profileId={profileId}
                             section={section}
                         />
                     )}
                 </Card.Header>
-                <Card.Description>{description}</Card.Description>
+                <Card.Description className='text-body'>{description}</Card.Description>
             </Card.Content>
         </Card>
     );

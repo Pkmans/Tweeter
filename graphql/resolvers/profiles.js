@@ -52,21 +52,25 @@ export default {
                 let [likeCount, commentCount, postCount] = [0, 0, 0];
 
                 posts.forEach(post => {
-                    if (post.username === username) 
+                    if (post.username === username) {
                         postCount++;
 
-                    post.likes.forEach(like => {
-                        if (like.username === username)
+                        post.likes.forEach(() => {
                             likeCount++;
-                    })
+                        })
+                    }
 
-                    post.comments.forEach(comment => {
-                        if (comment.username === username)
+
+                    post.comments.forEach((comment) => {
+                        if (comment.username === username) {
                             commentCount++;
+
+                            comment.likes.forEach(() => {
+                                likeCount++;
+                            })
+                        } 
                     }) 
                 });
-
-                console.log({likeCount, commentCount, postCount});
 
                 return {
                     likeCount,

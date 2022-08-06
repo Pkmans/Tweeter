@@ -1,3 +1,8 @@
+textarea {
+  min-height: 3rem;
+  max-height: 12.5rem;
+}
+
 .grid-column {
   margin-bottom: 2rem !important;
 }
@@ -112,16 +117,16 @@ input[type="file"] {
 }
 
 /* Inline styling */
-.inline-text{
+.inline-text {
   display: inline;
 }
 
 /* Postcard Header & Metadata */
-.ui.card .header a{
+.ui.card .header a {
   color: black;
 }
 
-.ui.card .header a:hover{
+.ui.card .header a:hover {
   text-decoration: underline;
 }
 
@@ -137,6 +142,12 @@ input[type="file"] {
 
 .ui.comments .author:hover {
   text-decoration: underline;
+}
+
+
+/* Text bodies keep new lines */
+.text-body {
+  white-space: pre-wrap;
 }
 
 
@@ -222,7 +233,7 @@ input[type="file"] {
 }
 
 /* PostCard Header */
-#dark .ui.card .header a{
+#dark .ui.card .header a {
   color: rgb(223, 223, 223);
 }
 
@@ -286,8 +297,7 @@ input[type="file"] {
 }
 
 #dark .ui.card .comment .author,
-#dark .ui.card .comment .text
-{
+#dark .ui.card .comment .text {
   color: rgb(223, 223, 223);
 }
 

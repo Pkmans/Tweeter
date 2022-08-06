@@ -112,7 +112,7 @@ function SinglePost() {
                                                 value={comment}
                                                 onChange={event => setComment(event.target.value)}
                                                 ref={commentInputRef}
-                                                rows='2'
+                                                rows='1'
                                             />
                                         </div>
                                         <Button

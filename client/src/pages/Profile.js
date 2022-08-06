@@ -12,8 +12,6 @@ import ProfileCard from '../components/ProfileCard';
 
 
 function Profile() {
-    console.log('profile component rendered');
-
     const { username } = useParams();
     const { user } = useContext(AuthContext);
     const { theme } = useContext(ThemeContext);

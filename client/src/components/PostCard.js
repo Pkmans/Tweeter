@@ -48,7 +48,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                             <EditButton postId={id} postBody={body} header='Editing Post' className='edit-button' />
                         )}
                         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
-                        <Card.Description>
+                        <Card.Description className='text-body'>
                             {body}
                         </Card.Description>
                     </>

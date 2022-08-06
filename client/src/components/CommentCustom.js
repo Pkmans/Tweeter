@@ -34,7 +34,7 @@ function CommentCustom({postId, comment: c, username, ...props}) {
                         <Icon name='heart' color='teal' /> {c.likeCount}
                     </div>
                 </Comment.Metadata>
-                <Comment.Text>{c.body}</Comment.Text>
+                <Comment.Text className='text-body'>{c.body}</Comment.Text>
                 <Comment.Actions>
                     <Comment.Action>
                         <LikeButtonSubtle
