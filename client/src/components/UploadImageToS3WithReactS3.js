@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { uploadFile } from 'react-s3';
 import { Icon } from 'semantic-ui-react';
 import { gql, useMutation } from '@apollo/client';
+
+import CropEasy from './crop/CropEasy';
+import {ThemeContext} from '../App';
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -17,35 +20,58 @@ const config = {
     secretAccessKey: SECRET_ACCESS_KEY,
 }
 
-const UploadImageToS3WithReactS3 = ({ profileId }) => {
-
-    const [selectedFile, setSelectedFile] = useState(null);
+function UploadImageToS3WithReactS3({ username, profileId }) {
+    const [photoURL, setPhotoURL] = useState(username?.photoURL);
+    const [file, setFile] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const [updatePicture] = useMutation(UPDATE_PROFILE_PICTURE);
 
-    function handleFileInput(e) {
-        setSelectedFile(e.target.files[0]);
+    const firstUpdate = useRef(true);
+    const {theme} = useContext(ThemeContext);
+
+    async function handleFileInput(e) {
+        const file = e.target.files[0];
+
+        if (file) {
+            setPhotoURL(URL.createObjectURL(file));
+            setModalOpen(true);
+        }
     }
 
-    async function handleUpload(file) {
-        uploadFile(file, config)
-            .then(data => {
-                console.log(data);
+    useEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+        }
 
-                // call mutation
-                updatePicture({ variables: { profileId, photoName: data.key } });
+        uploadFile(file, config)
+            .then(() => {
+                updatePicture({ variables: { profileId, photoName: file.name } });
             })
             .catch(err => console.error(err))
-    }
+    }, [file])
 
-    return <div>
-        <label htmlFor='file-upload-s3' className='custom-file-upload'>
-            <Icon name='picture' />
-            <p className='inline-text'>Change Picture</p>
-        </label>
-        <input type='file' onChange={handleFileInput} id="file-upload-s3" />
-        <button onClick={() => handleUpload(selectedFile)}> Upload to S3</button>
-    </div>
+    return (
+        modalOpen ? (
+            <CropEasy
+                photoURL={photoURL}
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
+                setFile={setFile}
+                setPhotoURL={setPhotoURL}
+            />
+        ) : (
+            <div className='profile-pic-button'>
+                <label htmlFor='file-upload-s3' className='custom-file-upload'>
+                    <Icon inverted={theme === 'dark'} name='picture' />
+                    <p className='inline-text'>Change Picture</p>
+                </label >
+                <input type='file' onChange={handleFileInput} id="file-upload-s3" style={{ width: 200 }}/>
+            </div>
+        )
+
+    )
 }
 
 const UPDATE_PROFILE_PICTURE = gql`

@@ -9,7 +9,7 @@ import LikeButtonSubtle from '../components/LikeButtonSubtle';
 import { FETCH_USER_PROFILE } from '../utils/graphql';
 
 
-function CommentCustom({postId, comment: c, username, ...props}) {
+function CommentCustom({ postId, comment: c, user, ...props }) {
     const { loading, data: { getProfileByUsername } = {} } = useQuery(FETCH_USER_PROFILE, {
         variables: { username: c.username }
     })
@@ -45,15 +45,16 @@ function CommentCustom({postId, comment: c, username, ...props}) {
                             subtle={true}
                         />
                     </Comment.Action>
-                    {username === c.username && (
-                        <Comment.Action>
-                            <DeleteButton
-                                postId={postId}
-                                commentId={c.id}
-                                subtle={true}
-                            />
-                        </Comment.Action>
-                    )}
+                    {user && (
+                        user.username === c.username && (
+                            <Comment.Action>
+                                <DeleteButton
+                                    postId={postId}
+                                    commentId={c.id}
+                                    subtle={true}
+                                />
+                            </Comment.Action>
+                        ))}
                 </Comment.Actions>
             </Comment.Content>
         </Comment>

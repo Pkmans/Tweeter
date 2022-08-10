@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import { Card, Grid, Image, Icon, Statistic } from 'semantic-ui-react';
+import 'rc-slider/assets/index.css';
 
 import { AuthContext } from '../context/auth';
 import { ThemeContext } from "../App";
 import EditButtonMultiple from "../components/EditButtonMultiple";
-import UploadForm from "../components/UploadForm";
 import { FETCH_USER_PROFILE, FETCH_STATS_QUERY } from '../utils/graphql';
 import ProfileCard from '../components/ProfileCard';
 import UploadImageToS3WithReactS3 from "../components/UploadImageToS3WithReactS3";
@@ -55,14 +55,11 @@ function Profile() {
                             <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )}
 
-                        {/* {username === user.username && (
-                            <UploadForm username={username} profileId={id} />
-                        )} */}
-
-                        {username === user.username && (
-                            <UploadImageToS3WithReactS3 profileId={id} />
-                        )}
-
+                        {user && (
+                            username === user.username && (
+                                <UploadImageToS3WithReactS3 username={username} profileId={id} />
+                            ))
+                        }
 
                     </Grid.Row>
                     <Grid.Row>
@@ -76,14 +73,16 @@ function Profile() {
                         <Card.Content>
                             <Card.Header>
                                 Details
-                                {user.username === username && (
-                                    <EditButtonMultiple
-                                        header='Details'
-                                        body={{ phone, email, birthDate }}
-                                        profileId={id}
-                                        className='edit-button'
-                                    />
-                                )}
+                                {user && (
+                                    user.username === username && (
+                                        <EditButtonMultiple
+                                            header='Details'
+                                            body={{ phone, email, birthDate }}
+                                            profileId={id}
+                                            className='edit-button'
+                                        />
+                                    ))
+                                }
                             </Card.Header>
                             <Card.Meta></Card.Meta>
                             <Card.Description><h4 style={{ display: 'inline-block' }}>Phone:</h4> {phone}</Card.Description>

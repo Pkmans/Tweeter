@@ -52,10 +52,19 @@ textarea {
   right: 0.8rem;
 }
 
-.profile-picture {
+.profile-picture,
+.profile-picture img {
   border: 1px solid rgb(223, 222, 222);
   box-shadow: 0 0px 8px 2px rgb(0 0 0 / 7%), 0 0px 20px 4px rgb(0 0 0 / 5%);
-  border-radius: 50%;
+  border-radius: 50% !important;
+  height: 170px;
+  width: 170px;
+  margin: auto;
+}
+
+.profile-picture.post {
+  height: 145px;
+  width: 145px;
 }
 
 .profile-pic-button {
@@ -150,6 +159,30 @@ input[type="file"] {
   white-space: pre-wrap;
 }
 
+/* Zoom Slider */
+.zoom-text {
+  text-align: left;
+}
+.zoom-slider {
+  width: 75% !important;
+  margin: 0 auto 1rem;
+}
+.rc-slider-handle {
+  background-color: rgb(88, 160, 255) !important;
+  border: solid 2px rgb(88, 160, 255) !important;
+  opacity: 1;
+  width: 18px !important;
+  height: 18px !important;
+  margin-top: -7px !important;
+}
+
+.rc-slider-track {
+  background-color: rgb(134, 185, 252) !important;
+}
+
+.rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+  box-shadow: none !important;
+}
 
 
 
@@ -314,10 +347,12 @@ input[type="file"] {
 }
 
 /* Profile Page */
-#dark .profile-picture {
+
+#dark .profile-picture,
+#dark .profile-picture img{
   border: 1px solid rgb(68, 68, 68);
   box-shadow: 0 0px 8px 2px rgba(168, 168, 168, 0.07), 0 0px 20px 4px rgba(146, 145, 145, 0.05);
-  border-radius: 50%;
+  border-radius: 50% !important;
 }
 
 /* Form Loading Spinner */

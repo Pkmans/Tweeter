@@ -51,9 +51,9 @@ function SinglePost() {
                         <Icon loading name='spinner' size='big' />
                     ) : (
                         getPostProfile.picture ? (
-                            <Image className='profile-picture' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${getPostProfile.picture}`} alt='image' />
+                            <Image className='profile-picture post' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${getPostProfile.picture}`} alt='image' />
                         ) : (
-                            <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                            <Image className='profile-picture post' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )
                     )}
                 </Grid.Column>
@@ -97,7 +97,7 @@ function SinglePost() {
                                 <Transition.Group>
                                     {comments.map(c => {
                                         return (
-                                            <CommentCustom key={c.id} comment={c} postId={id} username={user.username} />
+                                            <CommentCustom key={c.id} comment={c} postId={id} user={user} />
                                         )
                                     })}
                                 </Transition.Group>

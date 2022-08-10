@@ -109,7 +109,6 @@ export default {
 
         async updateProfilePicture(_, {profileId, photoName}) {
             try {
-                console.log('update profile picture query called');
                 await Profile.updateOne({_id: profileId}, {'picture': photoName});
                 return Profile.findById(profileId);
             } catch (err) {

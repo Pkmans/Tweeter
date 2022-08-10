@@ -63,8 +63,8 @@ function EditButtonMultiple({ postId, body, profileId, className, header }) {
 
             {/* Actions */}
             <Modal.Actions className='modal-components'>
-                <Button inverted={isDarkTheme} color="red" icon="times" content="Cancel" onClick={() => setOpen(false)} />
-                <Button inverted={isDarkTheme} type="submit" color="green" icon="save" content="Save" />
+                <Button inverted={isDarkTheme} color="grey" icon="times" content="Cancel" onClick={() => setOpen(false)} />
+                <Button inverted={isDarkTheme} type="submit" color="blue" icon="save" content="Save" />
             </Modal.Actions>
 
         </Modal>
