@@ -237,11 +237,6 @@ input[type="file"] {
   color: rgb(223, 223, 223);
 }
 
-/* Comments Profile Link */
-.ui.comments .author {
-  color: rgb(223, 223, 223) !important;
-}
-
 
 /* Like Button */
 #dark .ui.basic.teal.button,

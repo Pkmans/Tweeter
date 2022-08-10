@@ -30,7 +30,7 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
                                 className='profile-picture'
                                 floated='left'
                                 size='mini'
-                                src={`http://localhost:5000/images/${username}/${data.getProfileByUsername.picture}`}
+                                src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${data.getProfileByUsername.picture}`}
                             />
                         ) : (
                             <Image

@@ -51,7 +51,7 @@ function SinglePost() {
                         <Icon loading name='spinner' size='big' />
                     ) : (
                         getPostProfile.picture ? (
-                            <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${getPostProfile.picture}`} alt='image' />
+                            <Image className='profile-picture' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${getPostProfile.picture}`} alt='image' />
                         ) : (
                             <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )
