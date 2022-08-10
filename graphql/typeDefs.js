@@ -82,5 +82,6 @@ export default gql`
         editProfile(profileId: ID!, section: String!, body: String!): Profile!
         editMultipleProfile(profileId: ID!, phone: String!, email: String!, birthDate: String!): Profile!
         uploadFile(file: Upload!, username: String!, profileId: ID!): File!
+        updateProfilePicture(profileId: ID!, photoName: String!): Profile!
     }
 `;

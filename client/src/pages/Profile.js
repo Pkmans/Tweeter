@@ -9,6 +9,7 @@ import EditButtonMultiple from "../components/EditButtonMultiple";
 import UploadForm from "../components/UploadForm";
 import { FETCH_USER_PROFILE, FETCH_STATS_QUERY } from '../utils/graphql';
 import ProfileCard from '../components/ProfileCard';
+import UploadImageToS3WithReactS3 from "../components/UploadImageToS3WithReactS3";
 
 
 function Profile() {
@@ -49,14 +50,19 @@ function Profile() {
                         <h1 style={{ textAlign: 'center' }}>{username}</h1>
 
                         {picture ? (
-                            <Image className='profile-picture' src={`http://localhost:5000/images/${username}/${picture}`} alt='image' />
+                            <Image className='profile-picture' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${picture}`} alt='image' />
                         ) : (
                             <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )}
 
-                        {username === user.username && (
+                        {/* {username === user.username && (
                             <UploadForm username={username} profileId={id} />
+                        )} */}
+
+                        {username === user.username && (
+                            <UploadImageToS3WithReactS3 profileId={id} />
                         )}
+
 
                     </Grid.Row>
                     <Grid.Row>
