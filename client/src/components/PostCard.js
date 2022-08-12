@@ -20,21 +20,19 @@ function PostCard({ post: { id, username, createdAt, body, likes, likeCount, com
 
     return (
         <Card fluid className='postcard'>
-            <Card.Content>
+            <Card.Content className='profile-picture-container'>
                 {loading ? (
                     <Icon loading name='spinner' size='big' />
                 ) : (
                     <>
                         {data.getProfileByUsername.picture ? (
                             <Image
-                                className='profile-picture'
                                 floated='left'
                                 size='mini'
                                 src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${data.getProfileByUsername.picture}`}
                             />
                         ) : (
                             <Image
-                                className='profile-picture'
                                 floated='left'
                                 size='mini'
                                 src={'https://react.semantic-ui.com/images/avatar/large/molly.png'}

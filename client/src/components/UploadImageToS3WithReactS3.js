@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
-import { uploadFile } from 'react-s3';
+import { uploadFile, deleteFile } from 'react-s3';
 import { Icon } from 'semantic-ui-react';
 import { gql, useMutation } from '@apollo/client';
 
 import CropEasy from './crop/CropEasy';
-import {ThemeContext} from '../App';
+import { ThemeContext } from '../App';
+import {AuthContext} from '../context/auth';
+
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -19,6 +21,8 @@ const config = {
 }
 
 function UploadImageToS3WithReactS3({ username, profileId }) {
+    const {user} = useContext(AuthContext);
+
     const [photoURL, setPhotoURL] = useState(username?.photoURL);
     const [file, setFile] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
@@ -26,7 +30,7 @@ function UploadImageToS3WithReactS3({ username, profileId }) {
     const [updatePicture] = useMutation(UPDATE_PROFILE_PICTURE);
 
     const firstUpdate = useRef(true);
-    const {theme} = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
 
     async function handleFileInput(e) {
         const file = e.target.files[0];
@@ -38,16 +42,21 @@ function UploadImageToS3WithReactS3({ username, profileId }) {
     }
 
     useEffect(() => {
+        // Prevent triggering on first render
         if (firstUpdate.current) {
             firstUpdate.current = false;
             return;
         }
 
+        // Upload File to AWS S3
         uploadFile(file, config)
             .then(() => {
+                console.log(file);
                 updatePicture({ variables: { profileId, photoName: file.name } });
             })
             .catch(err => console.error(err))
+
+
     }, [file])
 
     return (
@@ -58,6 +67,7 @@ function UploadImageToS3WithReactS3({ username, profileId }) {
                 setModalOpen={setModalOpen}
                 setFile={setFile}
                 setPhotoURL={setPhotoURL}
+                username={user.username}
             />
         ) : (
             <div className='profile-pic-button'>
@@ -65,7 +75,7 @@ function UploadImageToS3WithReactS3({ username, profileId }) {
                     <Icon inverted={theme === 'dark'} name='picture' />
                     <p className='inline-text'>Change Picture</p>
                 </label >
-                <input type='file' onChange={handleFileInput} id="file-upload-s3" style={{ width: 200 }}/>
+                <input type='file' onChange={handleFileInput} id="file-upload-s3" style={{ width: 200 }} />
             </div>
         )
 

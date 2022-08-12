@@ -45,14 +45,14 @@ function Profile() {
         profileMarkup = (
             <Grid className='page-container'>
                 {/* Profile Picture */}
-                <Grid.Column width={4}>
-                    <Grid.Row>
+                <Grid.Column width={5}>
+                    <Grid.Row className='profile-picture-container'>
                         <h1 style={{ textAlign: 'center' }}>{username}</h1>
 
                         {picture ? (
-                            <Image className='profile-picture' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${picture}`} alt='image' />
+                            <Image src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${picture}`} alt='image' />
                         ) : (
-                            <Image className='profile-picture' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                            <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )}
 
                         {user && (
@@ -63,12 +63,12 @@ function Profile() {
 
                     </Grid.Row>
                     <Grid.Row>
-                        <Statistic.Group inverted={theme === 'dark'} size='small' items={statsRow1} />
+                        <Statistic.Group inverted={theme === 'dark'} size='small' items={statsRow1} widths={3} />
                     </Grid.Row>
                 </Grid.Column>
 
                 {/* Profile Descriptions */}
-                <Grid.Column width={12}>
+                <Grid.Column width={11}>
                     <Card fluid className="card profile" >
                         <Card.Content>
                             <Card.Header>

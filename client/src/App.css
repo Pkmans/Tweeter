@@ -34,12 +34,6 @@ textarea {
   margin-bottom: 1rem;
 }
 
-/* Semantic UI Icons */
-
-.ui.button:not(.icon)>.icon:not(.button):not(.dropdown) {
-  margin: 0;
-}
-
 /* Profile Page */
 
 .profile-card {
@@ -52,17 +46,16 @@ textarea {
   right: 0.8rem;
 }
 
-.profile-picture,
-.profile-picture img {
+.profile-picture-container img {
   border: 1px solid rgb(223, 222, 222);
-  box-shadow: 0 0px 8px 2px rgb(0 0 0 / 7%), 0 0px 20px 4px rgb(0 0 0 / 5%);
+  box-shadow: 0 0px 8px 2px rgb(0 0 0 / 6%), 0 0px 20px 4px rgb(0 0 0 / 4%);
   border-radius: 50% !important;
   height: 170px;
   width: 170px;
   margin: auto;
 }
 
-.profile-picture.post {
+.profile-picture-container .post {
   height: 145px;
   width: 145px;
 }
@@ -83,19 +76,6 @@ input[type="file"] {
   cursor: pointer;
 }
 
-/* Grid */
-
-.page-container {
-  margin: auto !important;
-  width: 68rem;
-}
-
-/* Cards */
-
-.ui.card {
-  word-wrap: break-word
-}
-
 /* Comment Section */
 
 .comment-like-button {
@@ -112,7 +92,6 @@ input[type="file"] {
 }
 
 .comment-liked-button:hover {
-  /* color: rgba(31, 31, 31, 0.692) !important; */
   filter: brightness(75%);
 }
 
@@ -120,17 +99,9 @@ input[type="file"] {
   max-width: none;
 }
 
-/* Theme Toggle Button */
-.theme-toggle-button {
-  margin: 0 0.6rem;
-}
-
-/* Inline styling */
-.inline-text {
-  display: inline;
-}
 
 /* Postcard Header & Metadata */
+
 .ui.card .header a {
   color: black;
 }
@@ -145,6 +116,7 @@ input[type="file"] {
 
 
 /* Comments Profile Link */
+
 .ui.comments .author {
   color: black !important;
 }
@@ -154,12 +126,8 @@ input[type="file"] {
 }
 
 
-/* Text bodies keep new lines */
-.text-body {
-  white-space: pre-wrap;
-}
-
 /* Zoom Slider */
+
 .zoom-text {
   text-align: left;
 }
@@ -185,13 +153,47 @@ input[type="file"] {
 }
 
 
+/* Semantic UI Icons */
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown) {
+  margin: 0;
+}
+
+/* Text bodies keep new lines */
+.text-body {
+  white-space: pre-wrap;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-button {
+  margin: 0 0.6rem;
+}
+
+/* Inline styling */
+.inline-text {
+  display: inline;
+}
+
+/* Grid */
+.page-container {
+  margin: auto !important;
+  width: 68rem;
+}
+
+/* Cards */
+.ui.card {
+  word-wrap: break-word
+}
+
+
+
 
 /* -----------------------------------------*/
 /*---- LIGHT MODE & DARK MODE STYLING ------*/
 /* -----------------------------------------*/
 
 
-/* --- Light --- */
+/* --- LIGHT --- */
+
 #light {
   min-height: 100vh;
 }
@@ -202,7 +204,8 @@ input[type="file"] {
   transition: none !important;
 }
 
-/* --- Dark --- */
+
+/* --- DARK --- */
 
 #dark {
   background-color: #1e1f20;
@@ -240,6 +243,7 @@ input[type="file"] {
 }
 
 /* Cards */
+
 #dark .card {
   background-color: #2a2b2c;
 }
@@ -270,8 +274,8 @@ input[type="file"] {
   color: rgb(223, 223, 223);
 }
 
-
 /* Like Button */
+
 #dark .ui.basic.teal.button,
 .ui.basic.teal.buttons .button {
   color: #03645f !important;
@@ -288,6 +292,7 @@ input[type="file"] {
 }
 
 /* Label on Like & Comment Buttons */
+
 #dark .ui.basic.label {
   background-color: #2a2b2c !important;
 }
@@ -304,6 +309,7 @@ input[type="file"] {
 }
 
 /* Error messages */
+
 #dark .ui.attached.error.message,
 #dark .ui.error.message {
   box-shadow: 0 0 0 1px #c4bbbb inset, 0 0 0 0 transparent;
@@ -326,7 +332,7 @@ input[type="file"] {
 
 #dark .ui.card .comment .author,
 #dark .ui.card .comment .text {
-  color: rgb(223, 223, 223);
+  color: rgb(223, 223, 223) !important;
 }
 
 #dark .ui.card .comment .metadata {
@@ -348,10 +354,9 @@ input[type="file"] {
 
 /* Profile Page */
 
-#dark .profile-picture,
-#dark .profile-picture img{
+#dark .profile-picture-container img{
   border: 1px solid rgb(68, 68, 68);
-  box-shadow: 0 0px 8px 2px rgba(168, 168, 168, 0.07), 0 0px 20px 4px rgba(146, 145, 145, 0.05);
+  box-shadow: 0 0px 8px 2px rgba(168, 168, 168, 0.07), 0 0px 20px 4px rgba(109, 108, 108, 0.05);
   border-radius: 50% !important;
 }
 
@@ -362,7 +367,6 @@ input[type="file"] {
 
 
 /* Modals */
-
 .ui.basic.modal input,
 .ui.basic.modal textarea {
   background: #434446 !important;

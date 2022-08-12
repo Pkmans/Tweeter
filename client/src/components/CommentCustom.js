@@ -20,9 +20,9 @@ function CommentCustom({ postId, comment: c, user, ...props }) {
                 <Icon loading name='spinner' size='big' />
             ) : (
                 getProfileByUsername.picture ? (
-                    <Comment.Avatar className='profile-picture' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${getProfileByUsername.picture}`} />
+                    <Comment.Avatar className='profile-picture-container' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${getProfileByUsername.picture}`} />
                 ) : (
-                    <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                    <Comment.Avatar className='profile-picture-container' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                 )
             )}
 

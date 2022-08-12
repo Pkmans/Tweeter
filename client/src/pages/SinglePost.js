@@ -5,7 +5,6 @@ import { Button, Card, Comment, Header, Icon, Label, Grid, Image, Form, Transiti
 import moment from 'moment';
 
 import { AuthContext } from '../context/auth';
-import { ThemeContext } from '../App';
 import LikeButton from '../components/LikeButton';
 import DeleteButton from '../components/DeleteButton';
 import CommentCustom from '../components/CommentCustom';
@@ -13,7 +12,6 @@ import { FETCH_POST_PROFILE_QUERY } from '../utils/graphql';
 
 function SinglePost() {
     const { user } = useContext(AuthContext);
-    const { theme } = useContext(ThemeContext);
     const { postId } = useParams();
 
     const [comment, setComment] = useState('');
@@ -46,14 +44,14 @@ function SinglePost() {
         postMarkup = (
             <Grid className='page-container'>
 
-                <Grid.Column width={3}>
+                <Grid.Column width={3} className='profile-picture-container'>
                     {loading ? (
                         <Icon loading name='spinner' size='big' />
                     ) : (
                         getPostProfile.picture ? (
-                            <Image className='profile-picture post' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${getPostProfile.picture}`} alt='image' />
+                            <Image className='post' src={`https://tweeter-project-aaronlam.s3.us-west-2.amazonaws.com/${getPostProfile.picture}`} alt='image' />
                         ) : (
-                            <Image className='profile-picture post' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
+                            <Image className='post' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
                         )
                     )}
                 </Grid.Column>

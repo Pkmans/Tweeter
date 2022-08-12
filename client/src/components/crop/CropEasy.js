@@ -6,7 +6,7 @@ import Cropper from 'react-easy-crop';
 import getCroppedImg from './utils/cropImage';
 
 
-function CropEasy({ photoURL, modalOpen, setModalOpen, setPhotoURL, setFile }) {
+function CropEasy({ photoURL, modalOpen, setModalOpen, setPhotoURL, setFile, username }) {
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -17,12 +17,13 @@ function CropEasy({ photoURL, modalOpen, setModalOpen, setPhotoURL, setFile }) {
 
     async function cropImage() {
         try {
-            const { file, url } = await getCroppedImg(
+            let { file, url } = await getCroppedImg(
                 photoURL,
                 croppedAreaPixels
             );
-            console.log(file);
-            console.log(url);
+            // Place profile pic in User's own Folder in AWS S3
+            file.name = `${username}/`+ file.name
+
             setPhotoURL(url);
             setFile(file);
             setModalOpen(false);
