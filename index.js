@@ -25,18 +25,23 @@ async function startServer() {
     // This middleware should be added before calling `applyMiddleware`.
     app.use(graphqlUploadExpress());
 
-    server.applyMiddleware({ app});
+    server.applyMiddleware({ app });
 
     app.use(express.static('public'));
     app.use(cors());
 
+    let port = process.env.PORT;
+    if (port == null || port == "") {
+        port = 5000;
+    }
+
     mongoose.connect(MONGODB)
         .then(() => {
             console.log("MongoDB connected successfully");
-            return app.listen({ port: 5000 })
+            return app.listen({ port })
         })
         .then(() => {
-            console.log(`🚀  Server ready at http://localhost:5000${server.graphqlPath}`);
+            console.log(`🚀  Server started successfully`);
         });
 }
 
