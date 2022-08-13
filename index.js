@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
 import cors from 'cors';
 import 'dotenv/config';
+import path from 'path';
 
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
@@ -27,12 +28,18 @@ async function startServer() {
 
     server.applyMiddleware({ app });
 
-    app.use(express.static('build'));
-    app.use(cors());
+
+
+    // ------------ Deployment ------------ //    
+    app.use(express.static(path.join(__dirname, '/client/build')));
 
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
+
+    // ------------ Deployment ------------ //
+
+    app.use(cors());
 
     const port = process.env.PORT || 5000;
 
