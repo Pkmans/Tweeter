@@ -27,7 +27,7 @@ async function startServer() {
 
     server.applyMiddleware({ app });
 
-    app.use(express.static('public'));
+    app.use(express.static('build'));
     app.use(cors());
 
     app.get('*', (req, res) => {
