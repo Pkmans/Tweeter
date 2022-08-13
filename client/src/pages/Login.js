@@ -43,7 +43,7 @@ function Login() {
                     name='username'
                     value={values.username}
                     onChange={onChange}
-                    error={errors.username ? true : false}
+                    error={errors && (errors.username ? true : false)}
                 />
                 <Form.Input
                     label='Password'
@@ -52,7 +52,7 @@ function Login() {
                     name='password'
                     value={values.password}
                     onChange={onChange}
-                    error={errors.password ? true : false}
+                    error={errors && (errors.password ? true : false)}
                 />
                 <Button type='submit' primary>Login</Button>
             </Form>
