@@ -30,10 +30,11 @@ async function startServer() {
     app.use(express.static('public'));
     app.use(cors());
 
-    let port = process.env.PORT;
-    if (port == null || port == "") {
-        port = 5000;
-    }
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+    })
+
+    const port = process.env.PORT || 5000;
 
     mongoose.connect(MONGODB)
         .then(() => {
@@ -41,7 +42,7 @@ async function startServer() {
             return app.listen({ port })
         })
         .then(() => {
-            console.log(`🚀  Server started successfully`);
+            console.log(`🚀  Server started successfully on ${port}`);
         });
 }
 

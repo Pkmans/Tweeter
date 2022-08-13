@@ -6,7 +6,7 @@ import {createUploadLink} from 'apollo-upload-client';
 import App from './App';
 
 const uploadLink = createUploadLink({
-    uri: 'http://localhost:5000/graphql'
+    uri: '/graphql'
 })
 
 const authLink = setContext(() => {
