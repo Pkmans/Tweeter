@@ -78,7 +78,7 @@ function Register() {
                 </Button>
             </Form>
 
-            {Object.keys(errors).length > 0 && (
+            {errors && (Object.keys(errors).length > 0 && (
                 <div className="ui error message">
                     <ul className="list">
                         {Object.values(errors).map(value => (
@@ -86,7 +86,7 @@ function Register() {
                         ))}
                     </ul>
                 </div>
-            )}
+            ))}
         </div>
     )
 }

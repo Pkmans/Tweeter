@@ -12,7 +12,7 @@ function Login() {
     const context = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const {onChange, onSubmit, values} = useForm(loginUserCallback, {
+    const { onChange, onSubmit, values } = useForm(loginUserCallback, {
         username: '',
         password: ''
     });
@@ -20,7 +20,7 @@ function Login() {
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         update(_, result) {
             context.login(result.data.login);
-            navigate('/');                        
+            navigate('/');
         },
         onError(err) {
             setErrors(err.graphQLErrors[0].extensions.errors);
@@ -57,7 +57,7 @@ function Login() {
                 <Button type='submit' primary>Login</Button>
             </Form>
 
-            {Object.keys(errors).length > 0 && (
+            {errors && (Object.keys(errors).length > 0 && (
                 <div className="ui error message">
                     <ul className="list">
                         {Object.values(errors).map(value => (
@@ -65,7 +65,7 @@ function Login() {
                         ))}
                     </ul>
                 </div>
-            )}
+            ))}
 
         </div>
     )
