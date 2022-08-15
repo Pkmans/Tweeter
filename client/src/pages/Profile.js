@@ -43,7 +43,7 @@ function Profile() {
         }
 
         profileMarkup = (
-            <Grid className='page-container'>
+            <Grid stackable className='page-container'>
                 {/* Profile Picture */}
                 <Grid.Column width={5}>
                     <Grid.Row className='profile-picture-container'>
@@ -63,7 +63,13 @@ function Profile() {
 
                     </Grid.Row>
                     <Grid.Row>
-                        <Statistic.Group inverted={theme === 'dark'} size='small' items={statsRow1} widths={3} />
+                        <Statistic.Group
+                            className='profile-stats'
+                            inverted={theme === 'dark'}
+                            size='small'
+                            items={statsRow1}
+                            widths={3}
+                        />
                     </Grid.Row>
                 </Grid.Column>
 

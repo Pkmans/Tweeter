@@ -14,7 +14,7 @@ textarea {
 
 .form-container {
   margin: auto;
-  width: 40rem;
+  max-width: 40rem;
 }
 
 .menu-bar-container {
@@ -33,6 +33,38 @@ textarea {
 .ui.input.fluid {
   margin-bottom: 1rem;
 }
+/* 
+Menu Bar
+@media only screen and (max-width: 440px) {
+  .responsive-menu {
+    flex-direction: column;
+    font-size: 1rem !important;
+  }
+
+  .theme-toggle-button {
+    width: 2rem !important;
+    min-height: 0.5rem !important;
+
+  }
+
+  .ui.toggle.checkbox .box:before,
+  .ui.toggle.checkbox label:before {
+    width: 2.9rem;
+  }
+
+  .ui.checkbox .box:after,
+  .ui.checkbox label:after {
+    height: 16px !important;
+    width: 16px !important;
+  }
+
+  .ui.checkbox .box:before,
+  .ui.checkbox label:before {
+    width: 2.6rem !important;
+    height: 16px !important;
+  }
+} */
+
 
 /* Profile Page */
 
@@ -74,6 +106,10 @@ input[type="file"] {
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+}
+
+.profile-stats {
+  margin-top: 1.5rem !important;
 }
 
 /* Comment Section */
@@ -131,10 +167,12 @@ input[type="file"] {
 .zoom-text {
   text-align: left;
 }
+
 .zoom-slider {
   width: 75% !important;
   margin: 0 auto 1rem;
 }
+
 .rc-slider-handle {
   background-color: rgb(88, 160, 255) !important;
   border: solid 2px rgb(88, 160, 255) !important;
@@ -165,7 +203,7 @@ input[type="file"] {
 
 /* Theme Toggle Button */
 .theme-toggle-button {
-  margin: 0 0.6rem;
+  margin: 0 0.4rem;
 }
 
 /* Inline styling */
@@ -176,7 +214,8 @@ input[type="file"] {
 /* Grid */
 .page-container {
   margin: auto !important;
-  width: 68rem;
+  /* max-width: 68rem !important; */
+  padding: 0 7% !important;
 }
 
 /* Cards */
@@ -354,7 +393,7 @@ input[type="file"] {
 
 /* Profile Page */
 
-#dark .profile-picture-container img{
+#dark .profile-picture-container img {
   border: 1px solid rgb(68, 68, 68);
   box-shadow: 0 0px 8px 2px rgba(168, 168, 168, 0.07), 0 0px 20px 4px rgba(109, 108, 108, 0.05);
   border-radius: 50% !important;

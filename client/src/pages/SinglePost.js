@@ -42,9 +42,9 @@ function SinglePost() {
         const { id, username, body, createdAt, likes, likeCount, comments, commentCount } = getPost;
 
         postMarkup = (
-            <Grid className='page-container'>
+            <Grid stackable className='page-container'>
 
-                <Grid.Column width={3} className='profile-picture-container'>
+                <Grid.Column width={4} className='profile-picture-container'>
                     {loading ? (
                         <Icon loading name='spinner' size='big' />
                     ) : (
@@ -57,7 +57,7 @@ function SinglePost() {
                 </Grid.Column>
 
                 {/* Post Section */}
-                <Grid.Column width={13}>
+                <Grid.Column width={12}>
                     <Card fluid>
                         <Card.Content>
                             <Card.Header>
@@ -88,7 +88,7 @@ function SinglePost() {
                     {/* Comments Section */}
                     <Card fluid>
                         <Card.Content>
-                            <Comment.Group size='large'>
+                            <Comment.Group>
                                 <Header as='h3' dividing>
                                     Comments
                                 </Header>

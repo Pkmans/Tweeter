@@ -5,9 +5,12 @@ import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
 import cors from 'cors';
 import 'dotenv/config';
 import path from 'path';
+import {fileURLToPath} from 'url';
 
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 async function startServer() {
 
@@ -31,7 +34,10 @@ async function startServer() {
 
 
     // ------------ Deployment ------------ //    
-    app.use(express.static(path.join(__dirname, '/client/build')));
+
+    const __dirname = path.dirname(__filename);
+
+    app.use(express.static(path.join(__dirname, "/client/build")));
 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
