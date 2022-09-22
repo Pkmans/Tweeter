@@ -6,7 +6,7 @@
 A Social Media App to connect with your friends.  
 
 Live Demo - [Tweeter](https://aaronlam2k-tweeter.herokuapp.com/)  
-Technologies used: [MongoDB](https://www.mongodb.com/) · [Express](https://expressjs.com/) · [React](https://reactjs.org/) · [Nodejs](https://nodejs.org/en/) · [GraphQL](https://graphql.org/) · [AWS S3](https://aws.amazon.com/s3/)
+Technologies used: [MongoDB](https://www.mongodb.com/) · [Express](https://expressjs.com/) · [React](https://reactjs.org/) · [Nodejs](https://nodejs.org/en/) · [GraphQL](https://graphql.org/) · [Amazon S3](https://aws.amazon.com/s3/)
 
 # Functionality
 - Create, Delete & Edit Posts
