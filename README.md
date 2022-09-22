@@ -4,7 +4,8 @@
 
 # Tweeter
 A Social Media App to connect with your friends.  
-  
+
+Live Demo - [Tweeter](https://aaronlam2k-tweeter.herokuapp.com/)  
 Technologies used: [MongoDB](https://www.mongodb.com/) · [Express](https://expressjs.com/) · [React](https://reactjs.org/) · [Nodejs](https://nodejs.org/en/) · [GraphQL](https://graphql.org/) · [AWS S3](https://aws.amazon.com/s3/)
 
 # Functionality
@@ -17,6 +18,7 @@ Technologies used: [MongoDB](https://www.mongodb.com/) · [Express](https://expr
 - User Authentication (Login and Register)
 - Checks validity of login/register information and displays errors
 - Dark/Light Mode 
+- All information saved to MongoDB
 
 # ScreenShots
 |Home|Dark Mode|
