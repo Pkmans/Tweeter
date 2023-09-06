@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/60535510/188039361-845a1cd4-e8e1-45cf-a164-7655f01655dd.png">
 </p>
 
-# Tweeter
+# Tweeter - [Live Demo](https://aaronlam2k-tweeter.herokuapp.com/)  
 A Social Media App to connect with your friends.  
 
 Live Demo - [Tweeter](https://aaronlam2k-tweeter.herokuapp.com/)  
